@@ -1,0 +1,728 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #046475;
+    --secondary-color: #03354d;
+    --background-color: #beecf8;
+    --text-color: #101111;
+    --header-bg: #ffffff;
+    --footer-bg: #025766;
+    --footer-text: #ecf0f1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-header {
+  flex-direction: column;
+    background-color: var(--header-bg);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 2px 5px 10px lightslategray;
+    background-color: #32717c;
+    gap: 1rem;
+    
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    
+    
+}
+
+.logo {
+    height: 200px;
+    margin-right: 1rem;
+    border-radius: 1rem;
+}
+
+.site-header h1 {
+    font-size: 1.7rem;
+    color: rgb(238, 217, 150);
+}
+
+.site-header nav ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.site-header nav ul li {
+    margin-left: 0;
+    text-align: center;
+}
+
+.site-header nav ul li a {
+  display: block;
+ padding: 0.75rem;
+    text-decoration: none;
+    /* color: var(--primary-color); */
+    color: rgb(116, 248, 204);
+    font-weight: 600;
+    transition: color 0.3s ease;
+    border-radius: 5px;
+}
+
+.site-header nav ul li a:hover {
+    color: var(--secondary-color);
+}
+.site-header nav {
+  width: 100%;
+}
+.site-header nav a.active {
+   text-decoration: none; 
+   color: rgb(7, 7, 7);
+   background-color: #a6dcec;
+}
+
+main {
+    flex-grow: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+main h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+.section-divider {
+   border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+    margin: 2rem 0;
+}
+.contact-form-container {
+    background-color: #a6dcec;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 25px black;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+.contact-form-container h3 {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+.contact-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #7fc2d6;
+    color: rgb(17, 17, 17);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #2980b9;
+}
+
+.contact-form button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.status-message {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.status-message.success {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.status-message.error {
+    color: #721c24;
+    background-color: #f8e2e4;
+}
+
+/* --- Bible Reader Styles --- */
+.bible-reader {
+    margin-top: 2rem;
+    background: #a6dcec;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 25px black;
+}
+
+.bible-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.bible-controls select {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+.bible-content {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    line-height: 1.8;
+}
+
+/* These classes come from the API.Bible HTML response */
+.bible-content .p {
+    margin-bottom: 1em;
+}
+
+.bible-content .v { /* Verse number */
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-right: 0.5em;
+    font-size: 0.8em;
+    vertical-align: super;
+}
+
+.bible-content .s { /* Section heading */
+    font-weight: bold;
+    display: block;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    color: var(--secondary-color);
+}
+
+.bible-content h3 { /* Chapter Title */
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+/* --- About Page Styles --- */
+.about-page p {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.about-page .quote {
+  font-style: italic;
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.2em;
+}
+
+.about-page .signature {
+  text-align: right;
+  font-style: italic;
+}
+
+/* --- Contact Page Styles --- */
+.contact-page {
+    text-align: center;
+}
+
+.contact-page > p {
+    max-width: 600px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.contact-info {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+/* --- Video Links Styles --- */
+.video-links-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.video-links-container h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.video-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.video-link-card {
+    background-color: #a6dcec;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: left;
+    box-shadow: 0 4px 20px black;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.video-link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.video-link-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.video-link-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+/* --- Home Page Styles --- */
+.home-page .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/elm2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    background-blend-mode: darken; 
+    box-shadow: 0 0 35px black;
+    /* height: 625px;
+    width: 375px;
+     */
+}
+
+.home-page .hero-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.home-page .hero-content .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.home-page .cta-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    white-space: nowrap;
+    box-shadow: 0 5px 20px black;/* --- About Page Layout Styles --- */
+    .about-page {
+      text-align: center; /* Center the h2 */
+    }
+    
+    .about-page-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    
+    .about-image {
+      width: 250px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px black;
+      object-fit: cover;
+      flex-shrink: 0; /* Prevent image from shrinking */
+    }
+    
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+    
+    .about-page .quote {
+      font-style: italic;
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 1.2em;
+    }
+    
+    .about-page .signature {
+      text-align: right;
+      font-style: italic;
+    }
+    
+    /* Responsive adjustments for About page */
+    @media (max-width: 768px) {
+      .about-page-content {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .about-image {
+        width: 80%;
+        max-width: 300px; /* Limit image size on mobile */
+      }
+    }
+    /* --- About Page Layout Styles --- */
+    .about-page {
+      text-align: center; /* Center the h2 */
+    }
+    
+    .about-page-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    
+    .about-image {
+      width: 250px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px black;
+      /* object-fit: cover; */
+      /* flex-shrink: 0; Prevent image from shrinking */
+    }
+    
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+    
+    .about-page .quote {
+      font-style: italic;
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 1.2em;
+    }
+    
+    .about-page .signature {
+      text-align: right;
+      font-style: italic;
+    }
+    
+    /* Responsive adjustments for About page */
+    @media (max-width: 768px) {
+      .about-page-content {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+    }
+    
+  }
+ /* --- Daily Verse Styles --- */
+ .daily-verse-container {
+     text-align: center;
+     padding: 2rem;
+     margin: 1rem auto 0 auto;
+     max-width: 800px;
+     background-color: #a6dcec; /* A very light, neutral background */
+     border-left: 5px solid var(--primary-color);
+     border-radius: 0 8px 8px 0;
+     box-shadow: 0 5px 25px black;
+ }
+ 
+ .daily-verse-container h3 {
+     color: var(--secondary-color);
+     margin-bottom: 1rem;
+     font-weight: 600;
+ }
+ 
+ .daily-verse-container .verse-text {
+     font-size: 1.2em;
+     font-style: italic;
+     line-height: 1.6;
+     color: var(--text-color);
+     margin: 0;
+ }
+ 
+ .daily-verse-container .verse-reference {
+     display: block;
+     margin-top: 1rem;
+     font-style: normal;
+     font-weight: 600;
+     color: var(--primary-color);/* --- Daily Image Styles --- */
+
+ }/* --- Picture Gallery Styles --- */
+ .pictures-page {
+   text-align: center;
+ }
+ 
+ .pictures-page > p {
+   margin-bottom: 2rem;
+   font-size: 1.1rem;
+   color: var(--text-color);
+ }
+ 
+ .picture-gallery {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+   gap: 1.5rem;
+ }
+ 
+ .picture-card {
+    background-color: #93c8d8;
+   border-radius: 8px;
+   overflow: hidden; /* Ensures the image corners are rounded */
+    box-shadow: 0 8px 20px black;;
+   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+ }
+ 
+ .picture-card:hover {
+   transform: translateY(-5px);
+    box-shadow: 0 5px 20px teal;
+  
+ }
+ 
+ .picture-card img {
+   width: 450px;
+   height: 350px; /* Fixed height for a uniform look */
+   object-fit: cover; /* This will cover the area, cropping if necessary */
+   display: block;
+  
+ }
+ 
+ .picture-card .picture-info {
+   padding: 1rem;
+   text-align: left;
+ }
+ 
+ .picture-card .picture-info h4 {
+   margin: 0;
+   color: var(--secondary-color);
+ }
+ 
+ /* --- About Page Image Fix --- */
+ .my-about-image {
+   width: 250px;
+   height: auto;
+   border-radius: 8px;
+   box-shadow: 0 5px 20px black;
+   object-fit: cover;
+   flex-shrink: 0; /* Prevent image from shrinking in the flex container */
+ }
+ 
+ @media (max-width: 768px) {
+   .my-about-image {
+     width: 80%;
+     max-width: 300px; /* Limit image size on mobile */
+   }
+ }
+ 
+  
+  .my-about-image{
+  width: 300px;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px black;
+}
+
+@media (max-width: 768px) {
+    .home-page .hero-section {
+        padding: 3rem 1.5rem; /* Reduce padding on smaller screens */
+    }
+  }
+
+.home-page .cta-button:hover {
+    background-color: #2980b9;
+}
+
+.home-page .features-overview {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.home-page .features-overview h2 {
+    margin-bottom: 2rem;
+}
+
+.home-page .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.home-page .feature-card {
+    background: #a6cdec;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px black;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-page .feature-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.home-page .feature-card p {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.home-page .feature-link {
+    background-color: #f1f1f1;
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    align-self: flex-start;
+}
+
+.home-page .feature-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+.home-page .hero-content h1 {
+        font-size: 2rem; /* Make title smaller on mobile */
+    }
+
+    .home-page .hero-content .subtitle {
+        font-size: 1.5rem; /* Adjust subtitle size */
+    }
+
+   /* --- Bible Study Page Styles --- */
+   .bible-study-page {
+     max-width: 900px;
+     margin: 0 auto;
+     text-align: center;
+   }
+   
+   .bible-study-page .study-step {
+     background-color: #fff;
+     padding: 2rem;
+     border-radius: 8px;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+     margin-bottom: 2rem;
+   }
+   
+   .bible-study-page .study-step h3 {
+     color: var(--secondary-color);
+     margin-bottom: 1rem;
+   }
+   
+   .bible-study-page .cta-button {
+     margin-top: 1rem;
+   }
+   
+   .quiz-container {
+     margin-top: 1.5rem;
+     border: 2px dashed #ccc;
+     padding: 2rem;
+     border-radius: 8px;
+     background-color: #f8f9fa;
+   }
+   
+   .quiz-container iframe {
+     width: 100%;
+     height: 500px; /* You can adjust this height */
+     border: none;
+   }
+   
+   .quiz-container .placeholder-text {
+     color: #6c757d;
+     font-style: italic;
+   }
+   /* --- Bible Study Page Styles --- */
+   .bible-study-page {
+     max-width: 900px;
+     margin: 0 auto;
+     text-align: center;
+   }
+   
+   .bible-study-page .study-step {
+     background-color: #fff;
+     padding: 2rem;
+     border-radius: 8px;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+     margin-bottom: 2rem;
+   }
+   
+   .bible-study-page .study-step h3 {
+     color: var(--secondary-color);
+     margin-bottom: 1rem;
+   }
+   
+   .bible-study-page .cta-button {
+     margin-top: 1rem;
+   }
+   
+   .quiz-container {
+     margin-top: 1.5rem;
+     border: 2px dashed #ccc;
+     padding: 2rem;
+     border-radius: 8px;
+     background-color: #f8f9fa;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   
