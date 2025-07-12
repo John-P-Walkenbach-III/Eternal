@@ -8,7 +8,7 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBYHPPhiIphrwYYgtfIDTWR70qzGk48hQA",
+  apiKey: "89793!!!!5555^__!@4jjhdjfk",
   authDomain: "eternal-life-ministry-online.firebaseapp.com",
   projectId: "eternal-life-ministry-online",
   storageBucket: "eternal-life-ministry-online.firebasestorage.app",
