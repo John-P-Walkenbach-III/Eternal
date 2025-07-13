@@ -7,15 +7,14 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "89793!!!!5555^__!@4jjhdjfk",
-  authDomain: "eternal-life-ministry-online.firebaseapp.com",
-  projectId: "eternal-life-ministry-online",
-  storageBucket: "eternal-life-ministry-online.firebasestorage.app",
-  messagingSenderId: "956104760847",
-  appId: "1:956104760847:web:4ba0b451139717a9928d7a",
-  measurementId: "G-2MQ1TNGYTS"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -25,3 +24,13 @@ export const db = getFirestore(app)
 export const auth = getAuth(app)
 
 export default{ app, db, auth}
+
+
+
+
+
+
+
+
+// Initialize Firebase
+

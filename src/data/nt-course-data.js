@@ -8,9 +8,24 @@
 // 3. Paste the quiz link as the 'value'.
 //
 const quizLinks = {
-  'Matthew-1': 'https://forms.office.com/r/HvcqFRV96W?embed=true'
-  // 'Matthew-2': 'https://your-link-for-matthew-2-goes-here',
+  'Matthew-1': 'https://forms.office.com/r/HvcqFRV96W?embed=true',
+  'Matthew-2': 'https://forms.office.com/r/uSBwWpnd3h?embed=true',
   // 'Matthew-3': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-4': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-5': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-6': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-7': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-8': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-9': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-10': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-11': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-12': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-13': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-14': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-15': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-16': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-17': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-18': 'https://your-link-for-matthew-3-goes-here',
   // etc.
 };
 
