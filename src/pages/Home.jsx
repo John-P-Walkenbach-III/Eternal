@@ -14,6 +14,7 @@ function Home() {
             <>
               <h1>Welcome back, {currentUser.displayName}!</h1>
               <p className="subtitle">We're glad to have you here. Ready to continue your journey?</p>
+              <Link to="/study" className="cta-button">Go to My Course</Link>
             </>
           ) : (
             <>
@@ -21,7 +22,6 @@ function Home() {
               <p className="subtitle">Gaining Faith in Jesus Christ, Together.</p>
             </>
           )}
-          <Link to="/about" className="cta-button">Learn More About Our Mission</Link>
         </div>
       </section>
 

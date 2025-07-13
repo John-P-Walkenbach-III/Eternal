@@ -5,7 +5,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -30,7 +31,15 @@ function AuthPage() {
           email,
           password
         );
-        await updateProfile(userCredential.user, { displayName });
+        const user = userCredential.user;
+        await updateProfile(user, { displayName });
+
+        // Create the user's progress document in Firestore
+        const progressDocRef = doc(db, "user_progress", user.uid);
+        await setDoc(progressDocRef, {
+          displayName: displayName,
+          email: user.email,
+        });
       } else {
         await signInWithEmailAndPassword(auth, email, password);
       }

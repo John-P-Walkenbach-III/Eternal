@@ -650,7 +650,10 @@ footer {
     }
 
     .home-page .hero-content .subtitle {
-        font-size: 1.5rem; /* Adjust subtitle size */
+        font-size: 1.3rem; /* Adjust subtitle size */
+        color: rgb(2, 190, 190);
+        font-weight: 600;
+        font-family: georgia;
     }
 
    /* --- Bible Study Page Styles --- */

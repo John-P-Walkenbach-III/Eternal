@@ -1,5 +1,5 @@
 import React from 'react'
-import BibleReader from '../components/BibleReader.jsx';
+import BibleReader from '../components/BibleReader.jsx'
 import VideoLinks from '../components/VideoLinks.jsx';
 
 function Features() {

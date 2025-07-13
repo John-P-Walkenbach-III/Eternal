@@ -10,9 +10,9 @@
 const quizLinks = {
   'Matthew-1': 'https://forms.office.com/r/HvcqFRV96W?embed=true',
   'Matthew-2': 'https://forms.office.com/r/uSBwWpnd3h?embed=true',
-  // 'Matthew-3': 'https://your-link-for-matthew-3-goes-here',
-  // 'Matthew-4': 'https://your-link-for-matthew-3-goes-here',
-  // 'Matthew-5': 'https://your-link-for-matthew-3-goes-here',
+  'Matthew-3': 'https://forms.office.com/r/0WzbjFBtw7?embed=true',
+  'Matthew-4': 'https://forms.office.com/r/Q7JCAfMA2B?embed=true',
+  'Matthew-5': 'https://forms.office.com/r/AYF3ewa25X?embed=true',
   // 'Matthew-6': 'https://your-link-for-matthew-3-goes-here',
   // 'Matthew-7': 'https://your-link-for-matthew-3-goes-here',
   // 'Matthew-8': 'https://your-link-for-matthew-3-goes-here',
@@ -26,6 +26,16 @@ const quizLinks = {
   // 'Matthew-16': 'https://your-link-for-matthew-3-goes-here',
   // 'Matthew-17': 'https://your-link-for-matthew-3-goes-here',
   // 'Matthew-18': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-19': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-20': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-21': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-22': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-23': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-24': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-25': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-26': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-27': 'https://your-link-for-matthew-3-goes-here',
+  // 'Matthew-28': 'https://your-link-for-matthew-3-goes-here',
   // etc.
 };
 
@@ -78,7 +88,6 @@ export const courseLessons = newTestamentCourse.flatMap(book =>
 );
 
 
-// put your embed code from Microsoft Forms here and copy the url and paste it above in the accompanying chapter: //
-
+//temporarily put your embed code from Microsoft Forms here and copy the url and paste it above in the accompanying chapter: //
 
 

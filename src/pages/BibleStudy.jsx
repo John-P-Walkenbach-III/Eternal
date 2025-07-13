@@ -100,7 +100,7 @@ function BibleStudy() {
     <div className="bible-study-page">
       <h2>New Testament Study Course</h2>
       <p>
-        Welcome to the course! Work your way through the chapters of the New Testament. Read the chapter, then take the quiz to test your knowledge.
+        Welcome to the course! Work your way through the chapters of the New Testament. Read the chapter, then take the quiz to test your knowledge. Might I recommend using the "Bible Reader" provided by us that is found in the Features section or by clicking the "Read Chapter" button. Some of the wording may vary from different Bible versions. The quizzes provided here are taken from our Bible Reader.
       </p>
 
       <div className="course-progress-overview">
