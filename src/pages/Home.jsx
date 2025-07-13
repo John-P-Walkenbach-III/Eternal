@@ -1,14 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DailyVerse from '../components/DailyVerse.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function Home() {
+  const { currentUser } = useAuth();
+
   return (
     <div className="home-page">
       <section className="hero-section">
         <div className="hero-content">
-          <h1>Welcome to Eternal Life Ministry</h1>
-          <p className="subtitle">Gaining Faith in Jesus Christ, Together.</p>
+          {currentUser ? (
+            <>
+              <h1>Welcome back, {currentUser.displayName}!</h1>
+              <p className="subtitle">We're glad to have you here. Ready to continue your journey?</p>
+            </>
+          ) : (
+            <>
+              <h1>Welcome to Eternal Life Ministry</h1>
+              <p className="subtitle">Gaining Faith in Jesus Christ, Together.</p>
+            </>
+          )}
           <Link to="/about" className="cta-button">Learn More About Our Mission</Link>
         </div>
       </section>

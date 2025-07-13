@@ -3,7 +3,7 @@
 :root {
     --primary-color: #046475;
     --secondary-color: #03354d;
-    --background-color: #beecf8;
+    --background-color: #8ed5e7;
     --text-color: #101111;
     --header-bg: #ffffff;
     --footer-bg: #025766;
@@ -37,7 +37,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     box-shadow: 0 2px 5px 10px lightslategray;
-    background-color: #32717c;
+    background-color: #4d9bb3;
     gap: 1rem;
     
 }
@@ -50,9 +50,10 @@ body {
 }
 
 .logo {
-    height: 200px;
+    height: 300px;
     margin-right: 1rem;
     border-radius: 1rem;
+    box-shadow: 0 0 30px black;
 }
 
 .site-header h1 {
@@ -532,6 +533,7 @@ footer {
    overflow: hidden; /* Ensures the image corners are rounded */
     box-shadow: 0 8px 20px black;;
    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+   max-width: 400px;
  }
  
  .picture-card:hover {
@@ -541,10 +543,12 @@ footer {
  }
  
  .picture-card img {
-   width: 450px;
-   height: 350px; /* Fixed height for a uniform look */
+   width: 400px;
+   height: auto; /* Fixed height for a uniform look */
    object-fit: cover; /* This will cover the area, cropping if necessary */
    display: block;
+   border-radius: .5rem;
+   box-shadow: 0 0 30px black;
   
  }
  
@@ -627,7 +631,7 @@ footer {
 }
 
 .home-page .feature-link {
-    background-color: #f1f1f1;
+    background-color: #b7f2f7;
     color: var(--primary-color);
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -699,7 +703,7 @@ footer {
    }
    
    .bible-study-page .study-step {
-     background-color: #fff;
+     background-color: #6ab2b8;
      padding: 2rem;
      border-radius: 8px;
      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -720,9 +724,279 @@ footer {
      border: 2px dashed #ccc;
      padding: 2rem;
      border-radius: 8px;
-     background-color: #f8f9fa;
+     background-color: #86d4d4;
      display: flex;
      justify-content: center;
      align-items: center;
+   }
+   /* --- Header Auth Controls --- */
+   .site-header {
+       display: grid;
+       grid-template-columns: auto 1fr auto;
+       gap: 2rem;
+       align-items: center;
+   }
+   
+   .site-header nav {
+       justify-self: center;
+   }
+   
+   .auth-controls {
+       display: flex;
+       align-items: center;
+       gap: 1rem;
+   }
+   
+   .user-greeting {
+       font-weight: 600;
+       white-space: nowrap;
+   }
+   
+   .auth-button {
+       background-color: var(--primary-color);
+       color: white;
+       padding: 0.5rem 1rem;
+       border-radius: 5px;
+       text-decoration: none;
+       font-weight: 600;
+       border: none;
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+       white-space: nowrap;
+   }
+   
+   .auth-button:hover {
+       background-color: #2980b9;
+   }
+   
+   /* --- Auth Page Styles --- */
+   .auth-page {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       padding: 2rem;
+   }
+   
+   .auth-container {
+       width: 100%;
+       max-width: 400px;
+       padding: 2rem;
+       background-color: #fff;
+       border-radius: 8px;
+       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+       text-align: center;
+   }
+   
+   .auth-container h2 {
+       margin-bottom: 1.5rem;
+       color: var(--secondary-color);
+   }
+   
+   .auth-container .form-group {
+       text-align: left;
+       margin-bottom: 1rem;
+   }
+   
+   .auth-container .cta-button {
+       width: 100%;
+       margin-top: 1rem;
+   }
+   
+   .toggle-auth-mode {
+       background: none;
+       border: none;
+       color: var(--primary-color);
+       cursor: pointer;
+       margin-top: 1.5rem;
+       font-size: 0.9rem;
+   }
+   
+   .toggle-auth-mode:hover {
+       text-decoration: underline;
+   }
+   /* --- Responsive Header Adjustments --- */
+   @media (max-width: 768px) {
+       .site-header {
+           /* Switch to a single column layout for all header items */
+           grid-template-columns: 1fr;
+           justify-items: center; /* Center all items horizontally */
+           gap: 1.5rem;
+           padding: 1rem;
+       }
+   
+       .site-header nav {
+           justify-self: stretch; /* Allow nav to take full width */
+           order: 3; /* Move nav to the bottom of the header stack */
+       }
+   
+       .site-header .logo-container {
+           order: 1;
+       }
+   
+       .site-header .auth-controls {
+           order: 2;
+           flex-direction: column; /* Stack greeting and button */
+           gap: 0.75rem;
+       }
+   
+       .site-header nav ul {
+           flex-direction: column;
+           width: 100%;
+           gap: 0.5rem;
+       }
+   
+       .site-header nav ul li {
+           margin-left: 0;
+           text-align: center;
+       }
+   
+       .site-header nav ul li a {
+           display: block;
+           padding: 0.75rem;
+           border-radius: 5px;
+           background-color: #52a8b8;
+       }
+   
+       .site-header nav a.active {
+           background-color: var(--primary-color);
+           color: white;
+           text-decoration: none;
+       }
+   }
+   /* --- Bible Study Course Styles --- */
+   .course-progress-overview {
+     background-color: #83f3ed;
+     padding: 1.5rem;
+     border-radius: 8px;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+     margin-bottom: 2rem;
+   }
+   
+   .lesson-list {
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+     margin-bottom: 2rem;
+   }
+   
+   .lesson-card {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     background-color: #83f3ed;
+     padding: 1rem 1.5rem;
+     border-radius: 8px;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+     transition: box-shadow 0.2s ease;
+   }
+   
+   .lesson-card:hover {
+     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+   }
+   
+   .lesson-info h4 {
+     margin: 0;
+     color: var(--secondary-color);
+   }
+   
+   .lesson-actions {
+     display: flex;
+     gap: 1rem;
+     align-items: center;
+   }
+   
+   .pagination-controls {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 1rem;
+   }
+   
+   .pagination-controls button {
+     background-color: var(--primary-color);
+     color: white;
+     border: none;
+     padding: 0.5rem 1rem;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+   }
+   
+   .pagination-controls button:hover:not(:disabled) {
+     background-color: #2980b9;
+   }
+   
+   .pagination-controls button:disabled {
+     background-color: #bdc3c7;
+     cursor: not-allowed;
+   }
+   .lesson-card.completed {
+     background-color: #e8f5e9; /* A light green to indicate completion */
+     border-left: 5px solid #4caf50;
+   }
+   
+   .completion-badge {
+     margin-left: 1rem;
+     font-size: 0.8rem;
+     font-weight: 600;
+     color: #2e7d32;
+     background-color: #c8e6c9;
+     padding: 0.2rem 0.5rem;
+     border-radius: 10px;
+   }
+   /* --- Score Entry Styles --- */
+   .score-entry {
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+   }
+   
+   .score-entry input {
+     width: 100px;
+     padding: 0.5rem;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     text-align: center;
+     font-family: 'Poppins', sans-serif;
+   }
+   
+   .score-entry button {
+     background-color: #27ae60; /* A green save button */
+     color: white;
+     border: none;
+     padding: 0.5rem 1rem;
+     border-radius: 4px;
+     cursor: pointer;
+     font-weight: 600;
+     transition: background-color 0.2s ease;
+   }
+   
+   .score-entry button:hover {
+     background-color: #229954;
+   }
+   
+   .lesson-card.completed .completion-badge {
+     color: #1e8e3e;
+     background-color: #d7f9e1;
+   }
+   /* --- Responsive adjustments for Bible Study page --- */
+   @media (max-width: 768px) {
+     .lesson-card {
+       flex-direction: column;
+       align-items: stretch; /* Make children take full width */
+       gap: 1rem;
+     }
+   
+     .lesson-card .lesson-info {
+       text-align: center;
+     }
+   
+     .lesson-card .lesson-actions {
+       justify-content: space-around; /* Evenly space the buttons */
+     }
+   
+     .lesson-card .score-entry {
+       justify-content: center; /* Center the score input and button */
+     }
    }
    

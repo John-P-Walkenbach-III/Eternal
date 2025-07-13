@@ -13,6 +13,7 @@ function About() {
           <p>
             My name is John P. Walkenbach III. I am the owner and developer of Eternal Life Ministry. My goal is to provide you with many scripture readings, links to Christian-based videos, and much more. I hope that your visit here will prove to be frequented, informative, and trustworthy. As I continue to improve upon this site, you may notice some changes from day to day as I am developing it and hosting it online simultaneously.
           </p>
+          <p>Please be advised that I will never post any <i>fake news</i> articles or videos that relate to the second coming of Jesus. I will always keep all my information strictly according to my Bible, which is a New King James Version Study Bible.</p>
           <p>
             I am creating this site to share with you all the peace, love, joy, and happiness our Lord and Savior Jesus Christ has blessed me with. Remember this always:
           </p>

@@ -57,7 +57,7 @@ function ContactForm() {
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" name="email" placeholder='Enter your email' value={formData.email} onChange={handleChange} required />
                 </div>
-                <div className="form-group">
+                <div className="form-grop">
                     <label htmlFor="message">Message/Prayer Request</label>
                     <textarea id="message" name="message" placeholder='Enter your message or prayer request' value={formData.message} onChange={handleChange} rows="5" required></textarea>
                 </div>

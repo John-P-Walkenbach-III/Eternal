@@ -15,11 +15,6 @@ const videoLinks = [
     name: "Elevation Church",
     url: "https://www.youtube.com/@elevationchurch",
     description: "Worship music and sermons from Pastor Stephen Furtick and Elevation Church."
- },
- {
-    name: "Jentezen Franklin Church",
-    url: "https://www.youtube.com/@jentezenfranklinmedia",
-    description: "Jentezen Franklin Media"
  }
 ];
 
