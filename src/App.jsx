@@ -75,7 +75,7 @@ function App() {
       </main>
 
       <footer>
-          <p>&copy; 2024 Eternal Life Ministry. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Eternal Life Ministry. All rights reserved.</p>
       </footer>
     </>
   )

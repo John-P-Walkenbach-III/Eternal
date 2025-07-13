@@ -20,6 +20,7 @@ function Home() {
             <>
               <h1>Welcome to Eternal Life Ministry</h1>
               <p className="subtitle">Gaining Faith in Jesus Christ, Together.</p>
+              <Link to="/about" className="cta-button">Learn More About Our Mission</Link>
             </>
           )}
         </div>

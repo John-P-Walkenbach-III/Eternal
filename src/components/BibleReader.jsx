@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 // The ID for the New King James Version on API.Bible
 const BIBLE_ID = 'de4e12af7f28f599-01';
@@ -113,4 +113,4 @@ function BibleReader() {
   );
 }
 
-export default BibleReader;
+export default BibleReader

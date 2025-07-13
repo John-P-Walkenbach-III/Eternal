@@ -1,53 +1,53 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom"
+import { auth, db } from "../firebase"
+import { doc, setDoc } from "firebase/firestore"
 
 function AuthPage() {
-  const [isSignUp, setIsSignUp] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [isSignUp, setIsSignUp] = useState(true)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [displayName, setDisplayName] = useState("")
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+    e.preventDefault()
+    setError("")
 
     try {
       if (isSignUp) {
         if (!displayName) {
-          setError("Please enter a display name.");
-          return;
+          setError("Please enter a display name.")
+          return
         }
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
           password
-        );
-        const user = userCredential.user;
-        await updateProfile(user, { displayName });
+        )
+        const user = userCredential.user
+        await updateProfile(user, { displayName })
 
         // Create the user's progress document in Firestore
-        const progressDocRef = doc(db, "user_progress", user.uid);
+        const progressDocRef = doc(db, "user_progress", user.uid)
         await setDoc(progressDocRef, {
           displayName: displayName,
           email: user.email,
-        });
+        })
       } else {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password)
       }
-      navigate("/"); // Redirect to home page after successful login/signup
+      navigate("/") // Redirect to home page after successful login/signup
     } catch (err) {
-      setError(err.message);
+      setError(err.message)
     }
-  };
+  }
 
   return (
     <div className="auth-page">
@@ -107,4 +107,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default AuthPage

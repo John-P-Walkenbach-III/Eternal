@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
 function DailyVerse() {
   const [verse, setVerse] = useState(null);
@@ -11,15 +11,15 @@ function DailyVerse() {
         // This is a free API, no key required.
         const response = await fetch(
           "https://beta.ourmanna.com/api/v1/get?format=json&order=daily"
-        );
+        )
         if (!response.ok) {
-          throw new Error("Failed to fetch the verse of the day.");
+          throw new Error("Failed to fetch the verse of the day.")
         }
-        const data = await response.json();
-        setVerse(data.verse.details);
+        const data = await response.json()
+        setVerse(data.verse.details)
       } catch (err) {
-        setError(err.message);
-        console.error(err);
+        setError(err.message)
+        console.error(err)
       } finally {
         setLoading(false);
       }
@@ -33,7 +33,7 @@ function DailyVerse() {
       <div className="daily-verse-container">
         <p>Loading inspirational verse...</p>
       </div>
-    );
+    )
   if (error)
     return (
       <div className="daily-verse-container">
@@ -41,7 +41,7 @@ function DailyVerse() {
           Could not load verse. Please try again later.
         </p>
       </div>
-    );
+    )
 
   return (
     <section className="daily-verse-container">
@@ -49,7 +49,7 @@ function DailyVerse() {
       <blockquote className="verse-text">"{verse.text}"</blockquote>
       <cite className="verse-reference">{verse.reference}</cite>
     </section>
-  );
+  )
 }
 
-export default DailyVerse;
+export default DailyVerse
