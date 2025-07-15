@@ -12,15 +12,15 @@ function Home() {
         <div className="hero-content">
           {currentUser ? (
             <>
-              <h1>Welcome back, {currentUser.displayName}!</h1>
+              <h1>Welcome back, {currentUser.displayName || currentUser.email}!</h1>
               <p className="subtitle">We're glad to have you here. Ready to continue your journey?</p>
-              <Link to="/study" className="cta-button">Go to My Course</Link>
+              <Link to="/dashboard" className="cta-button">Go to Your Dashboard</Link>
             </>
           ) : (
             <>
-              <h1>Welcome to Eternal Life Ministry</h1>
-              <p className="subtitle">Gaining Faith in Jesus Christ, Together.</p>
-              <Link to="/about" className="cta-button">Learn More About Our Mission</Link>
+              <h1>A Deeper Walk with the Word</h1>
+              <p className="subtitle">Join our free interactive New Testament study course. Track your progress, take quizzes, and grow in your understanding of the scriptures.</p>
+              <Link to="/login" className="cta-button">Sign Up & Start Studying</Link>
             </>
           )}
         </div>
@@ -47,11 +47,13 @@ function Home() {
             <p>Browse My Personal Christian Pictures Library.</p>
             <Link to="/pictures" className="feature-link">Browse Library</Link>
           </div>
-          <div className="feature-card">
-            <h3>Bible Study</h3>
-            <p>Deepen your understanding of the scriptures with guided lessons and quizzes.</p>
-            <Link to="/study" className="feature-link">Start Studying</Link>
-          </div>
+          {!currentUser && (
+            <div className="feature-card">
+              <h3>Interactive NT Course</h3>
+              <p>Track your study progress, save your quiz scores, and pick up where you left off. All for free when you create an account.</p>
+              <Link to="/login" className="feature-link">Create Your Account</Link>
+            </div>
+          )}
           <div className="feature-card">
             <h3>Get In Touch</h3>
             <p>Have a question or a prayer request? We would love to hear from you.</p>

@@ -5,7 +5,7 @@ function About() {
     <div className="about-page">
       <h2>About Me</h2>
       <div className="about-page-content">
-        <img src="/images/JW3.jpg" alt="John Walkenbach III" className="my-about-image" />
+        <img src="/images/johnW.jpg" alt="John Walkenbach III" className="my-about-image" />
         <div className="about-text">
           <p>
             Good day to all my brothers and sisters in Christ Jesus! May God continue to bless you and all those in your life with His everlasting peace, joy, and eternal love!

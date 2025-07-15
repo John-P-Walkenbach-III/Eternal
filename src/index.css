@@ -70,6 +70,8 @@ body {
 .site-header nav ul li {
     margin-left: 0;
     text-align: center;
+     list-style-type: none;
+
 }
 
 .site-header nav ul li a {
@@ -93,6 +95,9 @@ body {
    text-decoration: none; 
    color: rgb(7, 7, 7);
    background-color: #a6dcec;
+  
+
+
 }
 
 main {
@@ -315,7 +320,7 @@ footer {
 }
 
 .video-link-card {
-    background-color: #a6dcec;
+    background-color: #81bef0;
     border-radius: 8px;
     padding: 1.5rem;
     text-align: left;
@@ -327,7 +332,8 @@ footer {
 
 .video-link-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 15px teal;
+     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .video-link-card h4 {
@@ -361,6 +367,7 @@ footer {
     font-size: 2rem;
     margin-bottom: 1rem;
     color: white;
+    list-style-type: none;
 }
 
 .home-page .hero-content .subtitle {
@@ -612,13 +619,20 @@ footer {
 }
 
 .home-page .feature-card {
-    background: #a6cdec;
+    background: #81bef0;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 5px 25px black;
     display: flex;
     flex-direction: column;
+     
 }
+.home-page .feature-card:hover {
+  transform: translatey(-5px);
+  box-shadow: 0 0 25px teal;
+
+}
+
 
 .home-page .feature-card h3 {
     color: var(--secondary-color);
@@ -629,6 +643,29 @@ footer {
     flex-grow: 1;
     margin-bottom: 1.5rem;
 }
+/* In your main CSS file (e.g., src/index.css) */
+
+
+  /* ... all your other styles like background, padding, etc. ... */
+
+  /* --- ADD THIS LINE --- */
+ .feature-card {
+  /* ... your existing styles for the card ... */
+
+  /* ADD THIS LINE TO SMOOTH THE ANIMATION */
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.feature-card:hover {
+  /* Your existing hover styles will be here */
+  transform: translateY(-5px); /* Or whatever your translate value is */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  /* The border/background color change will also become smooth if you add it to the transition! */
+}
+
+
+
 
 .home-page .feature-link {
     background-color: #b7f2f7;
@@ -738,10 +775,13 @@ footer {
        grid-template-columns: auto 1fr auto;
        gap: 2rem;
        align-items: center;
+      
+       
    }
    
    .site-header nav {
        justify-self: center;
+     
    }
    
    .auth-controls {

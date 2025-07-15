@@ -1,45 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { courseLessons } from '../data/nt-course-data.js';
-import { useAuth } from '../context/AuthContext.jsx';
 import { db } from '../firebase.js';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
+import { useAuth } from '../context/AuthContext.jsx';
+import { useUserProgress } from '../hooks/useUserProgress.js';
 
 const LESSONS_PER_PAGE = 10;
 
 function BibleStudy() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
   const { currentUser } = useAuth();
-  const [userProgress, setUserProgress] = useState(null);
+  const { loading, userProgress, setUserProgress, completedLessonsCount, totalLessons, overallScore } = useUserProgress();
+  const initialPage = parseInt(searchParams.get('page'), 10) || 1;
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const [inputScores, setInputScores] = useState({});
-  const [loadingProgress, setLoadingProgress] = useState(true);
-
-  // Effect to fetch user progress from Firestore
-  useEffect(() => {
-    const fetchUserProgress = async () => {
-      if (!currentUser) {
-        setLoadingProgress(false);
-        return;
-      }
-      setLoadingProgress(true);
-      try {
-        const progressDocRef = doc(db, 'user_progress', currentUser.uid);
-        const docSnap = await getDoc(progressDocRef);
-        if (docSnap.exists()) {
-          setUserProgress(docSnap.data());
-        } else {
-          // No progress document yet, so we can set it to an empty object
-          setUserProgress({});
-        }
-      } catch (error) {
-        console.error("Error fetching user progress:", error);
-      } finally {
-        setLoadingProgress(false);
-      }
-    };
-
-    fetchUserProgress();
-  }, [currentUser]); // Re-run when the user logs in/out
 
   // Pagination logic
   const totalPages = Math.ceil(courseLessons.length / LESSONS_PER_PAGE);
@@ -86,13 +61,7 @@ function BibleStudy() {
     }
   };
 
-  // Calculate progress stats
-  const completedLessonsCount = userProgress ? Object.values(userProgress).filter(p => p.completed).length : 0;
-  const totalLessons = courseLessons.length;
-  const totalScore = userProgress ? Object.values(userProgress).reduce((acc, p) => acc + (p.score || 0), 0) : 0;
-  const overallScore = completedLessonsCount > 0 ? (totalScore / completedLessonsCount).toFixed(0) : 0;
-
-  if (loadingProgress) {
+  if (loading) {
     return <div className="bible-study-page"><p>Loading your progress...</p></div>;
   }
 

@@ -10,15 +10,15 @@ import BibleStudy from './pages/BibleStudy.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { useAuth } from './context/AuthContext.jsx';
-import { auth } from './firebase.js';
+import Dashboard from './pages/Dashboard.jsx';
 
 function App() {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await auth.signOut();
+      await logout();
       navigate('/'); // Redirect to home after logout
     } catch (error) {
       console.error('Failed to log out', error);
@@ -40,9 +40,16 @@ function App() {
                 <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/contact">Contact</NavLink></li>
                 <li><NavLink to="/pictures">Pictures</NavLink></li>
-                <li><NavLink to="/study">Bible Study</NavLink></li>
+                {currentUser && (
+                  <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                )}
             </ul>
         </nav>
+       
+      
+     
+       
+        
         <div className="auth-controls">
           {currentUser ? (
             <>
@@ -63,13 +70,24 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/pictures" element={<Pictures />} />
           <Route
-            path="/study"
+            path="/bible-study"
             element={
               <ProtectedRoute>
                 <BibleStudy />
               </ProtectedRoute>
             }
           />
+
+              <Route 
+  path="/dashboard" 
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  } 
+/>
+
+
           <Route path="/login" element={<AuthPage />} />
         </Routes>
       </main>

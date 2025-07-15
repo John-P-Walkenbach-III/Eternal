@@ -15,6 +15,21 @@ const videoLinks = [
     name: "Elevation Church",
     url: "https://www.youtube.com/@elevationchurch",
     description: "Worship music and sermons from Pastor Stephen Furtick and Elevation Church."
+ },
+ {
+  name: 'Jentezen Franklin Church',
+  url: 'https://www.youtube.com/@jentezenfranklinmedia',
+  description: ' Jentezen Franklin Media'
+ },
+ {
+  name: 'Prayer Video Of Forgiveness Of Sins',
+  url: 'https://www.youtube.com/watch?v=FnsvT5Iy-Xw&pp=ygURcmVwZW50YW5jZSBwcmF5ZXI%3D',
+  description: ' Daily Effective Prayer'
+ },
+ {
+  name: 'Video-Psalms 51 Reading: A Prayer Of Repentance',
+  url: 'https://www.youtube.com/watch?v=NCj5FPxQLOA&pp=ygURcmVwZW50YW5jZSBwcmF5ZXLSBwkJzQkBhyohjO8%3D',
+  description: ' God Is With Us- A prayer of repentance'
  }
 ];
 

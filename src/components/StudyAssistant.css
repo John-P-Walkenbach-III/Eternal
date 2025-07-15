@@ -1,0 +1,79 @@
+.study-assistant {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  margin-top: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.study-assistant h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.4em;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.study-assistant .context-info {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.study-assistant textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #bdc3c7;
+  margin-bottom: 12px;
+  font-family: inherit;
+  font-size: 1em;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.study-assistant .cta-button {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.study-assistant .cta-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.study-assistant .cta-button:not(:disabled):hover {
+  background-color: #2980b9;
+}
+
+.study-assistant .status-message.error {
+  color: #c0392b;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.study-assistant .ai-response {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #ecf0f1;
+  border-radius: 6px;
+  line-height: 1.6;
+}
+
+.study-assistant .ai-response h4 {
+  margin-top: 0;
+  color: #34495e;
+}
