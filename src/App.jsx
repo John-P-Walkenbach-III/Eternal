@@ -15,6 +15,8 @@ import Dashboard from './pages/Dashboard.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
 import GamePage from './pages/GamePage.jsx';
+import LeaderboardPage from './pages/LeaderboardPage.jsx';
+import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
 
 
 
@@ -50,6 +52,8 @@ function App() {
                   <>
                     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
                     <li><NavLink to="/game">Game</NavLink></li>
+                    <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
+                    <li><NavLink to="/journal">Journal</NavLink></li>
                     {/* <li><NavLink to="/living-word">The Living Word</NavLink></li> */}
                   </>
                 )}
@@ -93,6 +97,24 @@ function App() {
             element={
               <ProtectedRoute>
                 <GamePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/leaderboard"
+            element={
+              <ProtectedRoute>
+                <LeaderboardPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/journal"
+            element={
+              <ProtectedRoute>
+                <PrayerJournalPage />
               </ProtectedRoute>
             }
           />

@@ -43,7 +43,11 @@ export const useGameScore = () => {
     setError(null);
     const scoreDocRef = doc(db, 'game_scores', currentUser.uid);
     try {
-      await setDoc(scoreDocRef, { highScore: newScore }, { merge: true });
+      await setDoc(scoreDocRef, {
+        highScore: newScore,
+        displayName: currentUser.displayName,
+        lastUpdated: new Date(),
+      }, { merge: true });
     } catch (err) {
       setError("Could not save new high score.");
       console.error("Error updating high score:", err);

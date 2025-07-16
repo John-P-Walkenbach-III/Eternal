@@ -21,7 +21,7 @@ function Home() {
             <>
               <h1>A Deeper Walk with the Word</h1>
               <p className="subtitle">Join our free interactive New Testament study course. Track your progress, take quizzes, and grow in your understanding of the scriptures.</p>
-              <Link to="/login" className="cta-button">Sign Up & Start Studying</Link>
+              
             </>
           )}
         </div>
