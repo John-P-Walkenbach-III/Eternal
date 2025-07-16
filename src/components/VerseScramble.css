@@ -1,0 +1,120 @@
+.verse-scramble-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.verse-scramble-container h3 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  position:relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.scrambled-verse {
+  font-style: italic;
+}
+
+.answer-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 120px; /* Adjust to fit your font size and padding */
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: flex-start;
+}
+
+.answer-area .placeholder-text {
+  width: 100%;
+  text-align: center;
+  color: #888;
+  align-self: center;
+  font-style: italic;
+}
+
+.word-bank {
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.word-button {
+  background-color: #faf8f8;
+  border: 1px solid #b0b0b0;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.word-button.answer {
+  background-color: #94f7f2; /* A light teal color */
+  border-color: #00796b;
+}
+
+.word-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.action-button {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.feedback {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.feedback.success {
+  color: #2e7d32; /* A dark green */
+}
+
+.feedback.error {
+  color: #c62828; /* A dark red */
+}
+
+.timer {
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.timer.low-time {
+  background-color: #ffcdd2;
+  color: #c62828;
+}

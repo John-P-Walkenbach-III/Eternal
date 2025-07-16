@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DailyVerse from '../components/DailyVerse.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import CoursePromo  from '../components/CoursePromo.jsx';
 
 function Home() {
   const { currentUser } = useAuth();
@@ -29,6 +30,7 @@ function Home() {
       <DailyVerse />
       <hr className="section-divider" />
 
+      <CoursePromo />
       <section className="features-overview">
         <h2>What We Offer</h2>
         <div className="features-grid">

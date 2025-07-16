@@ -1,0 +1,81 @@
+.annotation-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.annotation-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.annotation-card.featured {
+  border-color: #ffd700;
+  border-left-width: 5px;
+  background-color: #fffbeb;
+}
+
+.featured-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ffd700;
+  color: #333;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-bottom-left-radius: 8px;
+}
+
+
+.annotation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.annotation-author {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.annotation-comment {
+  font-style: italic;
+  color: #444;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.annotation-footer {
+  text-align: right;
+}
+
+.upvote-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.upvote-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.upvote-button span {
+  margin-right: 0.5rem;
+}

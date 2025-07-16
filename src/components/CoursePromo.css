@@ -1,0 +1,89 @@
+.course-promo-section {
+  padding: 4rem 2rem;
+  background-color: var(--background-color);
+  text-align: center;
+
+}
+
+.promo-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.course-promo-section h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.promo-intro {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+}
+
+.course-promo-section h3 {
+  font-size: 2rem;
+  color: var(--secondary-color);
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.step-card {
+  background-color: #81bef0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 25px black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px teal;
+}
+
+.step-icon {
+  font-size: 3rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.step-card h4 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.step-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.promo-cta-button {
+  display: inline-block;
+  background-color:teal;
+  color: white;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.promo-cta-button:hover {
+  background-color: #e55c00; /* A darker shade of the accent color */
+  transform: translateY(-2px);
+}

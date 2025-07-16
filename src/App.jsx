@@ -9,8 +9,14 @@ import Pictures from './pages/Pictures.jsx';
 import BibleStudy from './pages/BibleStudy.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+// import LivingWord from './pages/LivingWord.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import { getDisplayName } from './utils/helpers.jsx';
+import SignUp from './pages/SignUp.jsx';
+import GamePage from './pages/GamePage.jsx';
+
+
 
 function App() {
   const { currentUser, logout } = useAuth();
@@ -41,7 +47,11 @@ function App() {
                 <li><NavLink to="/contact">Contact</NavLink></li>
                 <li><NavLink to="/pictures">Pictures</NavLink></li>
                 {currentUser && (
-                  <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                  <>
+                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                    <li><NavLink to="/game">Game</NavLink></li>
+                    {/* <li><NavLink to="/living-word">The Living Word</NavLink></li> */}
+                  </>
                 )}
             </ul>
         </nav>
@@ -53,7 +63,7 @@ function App() {
         <div className="auth-controls">
           {currentUser ? (
             <>
-              <span className="user-greeting">Hello, {currentUser.displayName || currentUser.email}</span>
+              <span className="user-greeting">Hello, {getDisplayName(currentUser)}</span>
               <button onClick={handleLogout} className="auth-button">Log Out</button>
             </>
           ) : (
@@ -78,6 +88,24 @@ function App() {
             }
           />
 
+          <Route
+            path="/game"
+            element={
+              <ProtectedRoute>
+                <GamePage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* <Route
+            path="/living-word"
+            element={
+              <ProtectedRoute>
+                <LivingWord />
+              </ProtectedRoute>
+            }
+          /> */}
+
               <Route 
   path="/dashboard" 
   element={
@@ -89,6 +117,7 @@ function App() {
 
 
           <Route path="/login" element={<AuthPage />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </main>
 

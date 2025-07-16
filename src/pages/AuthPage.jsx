@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+
 import { auth, db } from "../firebase"
 import { doc, setDoc } from "firebase/firestore"
 
@@ -14,6 +16,7 @@ function AuthPage() {
   const [password, setPassword] = useState("")
   const [displayName, setDisplayName] = useState("")
   const [error, setError] = useState("")
+  const [resetEmailSent, setResetEmailSent] = useState(false);
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -48,6 +51,19 @@ function AuthPage() {
       setError(err.message)
     }
   }
+
+  const handleForgotPassword = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setResetEmailSent(true);
+      setError('');
+    } catch (err) {
+      setError(`Failed to send reset email: ${err.message}`);
+      console.error("Forgot password error", err);
+    }
+  };
+
+
 
   return (
     <div className="auth-page">
@@ -92,6 +108,18 @@ function AuthPage() {
           <button type="submit" className="cta-button">
             {isSignUp ? "Sign Up" : "Log In"}
           </button>
+
+          {!isSignUp && (
+            <>
+              <button type="button" onClick={handleForgotPassword} className="forgot-password-button">
+                Forgot Password?
+              </button>
+
+              {resetEmailSent && (
+                <p className="success-message">Password reset email sent! Check your inbox.</p>
+              )}
+            </>
+          )}
           {error && <p className="status-message error">{error}</p>}
         </form>
         <button
