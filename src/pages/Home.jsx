@@ -34,8 +34,8 @@ function Home() {
         <div className="features-grid">
           <div className="feature-card">
             <h3>Explore the Scriptures</h3>
-            <p>Use our integrated NKJV Bible reader to study the Word of God anytime.</p>
-            <Link to="/features" className="feature-link">Go to Bible Reader</Link>
+            <p>Look up any passage in the World English Bible with our reader.</p>
+            <Link to="/bible-reader" className="feature-link">Go to Bible Reader</Link>
           </div>
           <div className="feature-card">
             <h3>Inspiring Messages</h3>

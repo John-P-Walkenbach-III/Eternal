@@ -3,6 +3,16 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+        // Add this block inside the main match /databases/{database}/documents { ... }
+    match /quizScores/{scoreId} {
+      // A user can read a score document if their UID matches the userId in that document.
+      allow read: if request.auth.uid == resource.data.userId;
+
+      // A user can create or update a score document if their UID matches the userId they are trying to save.
+      allow write: if request.auth.uid == request.resource.data.userId;
+    }
+
+
     // Default rule: Deny all reads/writes unless a specific rule allows it.
     match /{document=**} { allow read, write: if false; }
 
@@ -13,6 +23,13 @@ service cloud.firestore {
       allow create: if request.auth.uid == request.resource.data.userId;
       allow delete: if request.auth.uid == 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
     }
+
+        // Add this block for devotional likes
+    match /devotionals/{verseId}/likes/{userId} {
+      // Allow a user to read, create, or delete their own like document.
+      allow read, write: if request.auth.uid == userId;
+    }
+
 
 
     // --- USER-SPECIFIC DATA ---

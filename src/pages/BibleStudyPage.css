@@ -1,0 +1,81 @@
+.bible-study-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.study-category {
+  margin-bottom: 2rem;
+}
+
+.study-book {
+  margin-left: 1rem;
+  border-left: 3px solid #eee;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.study-book h3 {
+  cursor: pointer;
+  position: relative;
+  margin-top: 0;
+  padding-right: 20px; /* Space for the arrow */
+  user-select: none; /* Prevents text selection on click */
+}
+
+.study-book h3::after {
+  content: '▶'; /* Collapsed state arrow */
+  position: absolute;
+  right: 0;
+  font-size: 0.8em;
+  transition: transform 0.2s ease-in-out;
+}
+
+.study-book ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.study-book li {
+  margin-bottom: 0.5rem;
+}
+
+.study-book a {
+  text-decoration: none;
+  color: #0056b3;
+}
+
+.study-book a:hover {
+  text-decoration: underline;
+}
+
+.study-book.expanded h3::after {
+  transform: rotate(90deg); /* Expanded state arrow */
+}
+
+.search-bar-container {
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+  .bible-study-container {
+    padding: 1rem;
+  }
+}

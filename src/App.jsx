@@ -8,11 +8,14 @@ import Contact from './pages/Contact.jsx';
 import Pictures from './pages/Pictures.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import BibleStudyPage from './pages/BibleStudyPage.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
+import BibleReaderPage from './pages/BibleReaderPage.jsx';
 import GamePage from './pages/GamePage.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
+import MyProgressPage from './pages/MyProgressPage.jsx';
 import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
 import DevotionalPage from './pages/DevotionalPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
@@ -64,6 +67,9 @@ function App() {
                   <>
                     <li><NavLink to="/game">Game</NavLink></li>
                     <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
+                    <li><NavLink to="/bible-study">Bible Study</NavLink></li>
+                    <li><NavLink to="/my-progress">My Progress</NavLink></li>
+                    <li><NavLink to="/bible-reader">Bible Reader</NavLink></li>
                     <li><NavLink to="/journal">Journal</NavLink></li>
                     <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
                     {isAdmin && (
@@ -105,6 +111,14 @@ function App() {
           <Route path="/pictures" element={<Pictures />} />
          
           <Route
+            path="/bible-study"
+            element={
+              <ProtectedRoute>
+                <BibleStudyPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/game"
             element={
               <ProtectedRoute>
@@ -117,6 +131,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <LeaderboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bible-reader"
+            element={
+              <ProtectedRoute>
+                <BibleReaderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bible-reader/:passageId"
+            element={
+              <ProtectedRoute>
+                <BibleReaderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-progress"
+            element={
+              <ProtectedRoute>
+                <MyProgressPage />
               </ProtectedRoute>
             }
           />

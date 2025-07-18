@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 
 // The ID for the New King James Version on API.Bible
 const BIBLE_ID = 'de4e12af7f28f599-01';
 const API_KEY = import.meta.env.VITE_BIBLE_API_KEY;
 
 function BibleReader() {
+  const { passageId } = useParams(); // Get the passage from the URL
+
   // State for our component
   const [books, setBooks] = useState([]);
   const [chapters, setChapters] = useState([]);
@@ -40,6 +43,35 @@ function BibleReader() {
 
     fetchBooks();
   }, []);
+
+  // Effect to handle deep linking from the URL
+  useEffect(() => {
+    // Only run if we have a passageId from the URL and the list of books has loaded
+    if (passageId && books.length > 0) {
+      // Decode and parse the passageId, e.g., "Genesis 1"
+      const decodedPassage = decodeURIComponent(passageId);
+      const parts = decodedPassage.match(/^(.+?)\s+(\d+)$/);
+
+      if (!parts) {
+        setError(`Invalid passage format: "${decodedPassage}"`);
+        return;
+      }
+
+      const bookName = parts[1];
+      const chapterNumber = parts[2];
+
+      // Find the book by name (case-insensitive)
+      const book = books.find(b => b.name.toLowerCase() === bookName.toLowerCase());
+
+      if (book) {
+        // Set the selected book and chapter, which will trigger the other effects
+        setSelectedBook(book.id);
+        setSelectedChapter(`${book.id}.${chapterNumber}`);
+      } else {
+        setError(`Book not found: "${bookName}"`);
+      }
+    }
+  }, [passageId, books]); // Reruns when passageId or books array changes
 
   // Effect to fetch chapters when a book is selected
   useEffect(() => {

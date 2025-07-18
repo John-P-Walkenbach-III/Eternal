@@ -1,146 +1,160 @@
-.journal-page {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem 2rem;
-}
+ 
 
-.journal-header {
+.journal-container h1, .journal-container h2 {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.journal-header h1 {
-  color: var(--primary-color);
+.journal-form {
+  background: #f9f9f9;
+  padding: 2rem;
+  margin-bottom: 2rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   gap: 1rem;
 }
 
-.journal-form-section {
-  margin-bottom: 2.5rem;
+.journal-form input{
+
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
 }
 
-.journal-form-section form {
+
+.journal-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.journal-form select {
+  cursor: pointer;
+}
+
+.journal-form button {
+  transition: background-color 0.2s;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.journal-form button:hover {
+  background-color: #0056b3;
+}
+
+
+.journal-entry {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
 }
 
-.journal-form-section textarea {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  font-family: inherit;
-  resize: vertical;
-  min-height: 120px;
-}
-
-.journal-form-section button {
-  align-self: flex-end;
-  padding: 0.8rem 1.5rem;
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
-}
-
-.journal-form-section button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.journal-form-section button:hover:not(:disabled) {
-  background-color: var(--secondary-color);
-}
-
-.journal-entries-section h2 {
-  border-bottom: 2px solid #eee;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.entry-card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-left: 5px solid var(--accent-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.entry-actions {
+.entry-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.entry-header h3 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.entry-header small {
+  color: #666;
+}
+
+.entry-meta {
+  display: flex;
   align-items: center;
-  color: #888;
-  font-size: 0.9rem;
+  gap: 1rem;
+}
+
+.entry-category {
+  background-color: #e9ecef;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #495057;
 }
 
 .entry-content {
-  white-space: pre-wrap; /* Preserves newlines and spaces */
-  line-height: 1.7;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  white-space: pre-wrap; /* Preserves formatting */
+  margin-bottom: 1rem;
+  flex-grow: 1;
 }
-
-.edit-textarea {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  min-height: 100px;
-  resize: vertical;
-  font-family: inherit;
-  margin-bottom: .8rem;
-}
-
 
 .entry-actions {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #888;
-  font-size: 0.9rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
-.entry-actions .edit-button,
+.entry-actions button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
 .delete-button {
-    background: none;
-    border: none;
-    color: #a0a0a0;
-    cursor: pointer;
-    padding: 0.5rem;
-    margin-left: 0.5rem;
-    transition: color 0.2s ease;
-}
-
-.entry-actions .edit-button:hover {
-  color: var(--secondary-color);
-}
-
-.entry-actions .edit-button.save {
-  color: var(--success-color, #5cb85c); /* You might define this color */
-}
-
-.entry-actions .edit-button.save:hover {
-  color: darken(#5cb85c, 10%); /* Darken using a function like SCSS darken */
+  background-color: #dc3545;
+  color: white;
 }
 
 .delete-button:hover {
-    color: var(--error-color, #d9534f);
+  background-color: #c82333;
 }
 
-.status-message.success {
-  color: var(--success-color, #5cb85c);
+.edit-button {
+  background-color: #ffc107;
+  color: #212529;
 }
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.journal-filters {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.journal-filters span {
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.filter-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-button.active,
+.filter-button:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+

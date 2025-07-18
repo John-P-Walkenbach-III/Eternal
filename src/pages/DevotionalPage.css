@@ -1,7 +1,7 @@
 .devotional-page {
+  padding: 2rem;
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem 2rem;
+  margin: 0 auto;
 }
 
 .devotional-header {
@@ -10,37 +10,128 @@
 }
 
 .devotional-header h1 {
-  color: var(--primary-color);
+  margin-bottom: 0.5rem;
 }
 
-.devotional-content {
-  line-height: 1.7;
+.devotional-header p {
   font-size: 1.1rem;
+  color: #666;
 }
 
-.reflection-text {
-  white-space: pre-wrap; /* This will respect newlines in the content */
+.daily-verse-container {
+  background-color: #f9f9f9;
+  border-left: 5px solid #0056b3;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: left;
 }
 
-.devotional-footer {
-  margin-top: 2rem;
+.devotional-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.devotional-date {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.verse-card {
+  background-color: #f9f9f9;
+  border-left: 5px solid #0056b3;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.verse-text {
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.verse-reference {
+  display: block;
   text-align: right;
+  font-weight: bold;
+  color: #333;
+}
+
+.reflection-section {
+  text-align: left;
+  line-height: 1.7;
+}
+
+.error-message {
+  color: #d9534f; /* A standard red for errors */
+  font-weight: bold;
+}
+
+.verse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.verse-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.save-verse-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+
+.verse-actions {
+  margin-top: 1.5rem;
+  display: flex;
 }
 
 .like-button {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1rem;
-  color: #555;
+
 }
 
-.like-button.liked, .like-button:disabled {
-  color: #e74c3c; /* Red color for liked state */
-  cursor: default;
+.save-verse-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.save-verse-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.like-button.liked, .like-button:hover:not(:disabled) {
+  background: #e0f0ff;
+  color: #0056b3;
+  border-color: #0056b3;
 }

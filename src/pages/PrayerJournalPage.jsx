@@ -1,173 +1,162 @@
 import React, { useState, useEffect } from 'react';
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  query,
-  onSnapshot,
-  orderBy,
-  deleteDoc,
-  doc, updateDoc
-} from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
+import { collection, addDoc, query, orderBy, onSnapshot, deleteDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import './PrayerJournalPage.css';
-import { FaBookMedical, FaTrash } from 'react-icons/fa';
 
-function PrayerJournalPage() {
+const PrayerJournalPage = () => {
   const { currentUser } = useAuth();
   const [entries, setEntries] = useState([]);
-  const [newEntry, setNewEntry] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [editingId, setEditingId] = useState(null);
-  const [editedContent, setEditedContent] = useState('');
-  const [error, setError] = useState(null);
+  const [newEntry, setNewEntry] = useState({ title: '', content: '', category: 'General' });
+  const [editingEntry, setEditingEntry] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [filterCategory, setFilterCategory] = useState('All');
 
-  // Fetch entries in real-time
   useEffect(() => {
     if (!currentUser) {
-      setLoading(false);
+      setIsLoading(false);
       return;
     }
 
-    setLoading(true);
     const journalCollectionRef = collection(db, 'users', currentUser.uid, 'journalEntries');
     const q = query(journalCollectionRef, orderBy('createdAt', 'desc'));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const fetchedEntries = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        // Convert Firestore timestamp to a readable date
-        createdAt: doc.data().createdAt?.toDate().toLocaleDateString()
-      }));
+      const fetchedEntries = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setEntries(fetchedEntries);
-      setLoading(false);
-    }, (err) => {
-      console.error("Error fetching journal entries:", err);
-      setError("Failed to load journal entries. Please try again.");
-      setLoading(false);
+      setIsLoading(false);
+    }, (error) => {
+      console.error("Error fetching journal entries:", error);
+      setIsLoading(false);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, [currentUser]);
 
-  const handleSaveEntry = async (e) => {
+  const handleAddEntry = async (e) => {
     e.preventDefault();
-    if (!currentUser || !newEntry.trim()) {
-      return;
-    }
+    if (newEntry.title.trim() === '' || newEntry.content.trim() === '' || !newEntry.category) return;
 
     try {
       const journalCollectionRef = collection(db, 'users', currentUser.uid, 'journalEntries');
       await addDoc(journalCollectionRef, {
-        content: newEntry,
+        title: newEntry.title,
+        content: newEntry.content,
         createdAt: serverTimestamp(),
-        userId: currentUser.uid,
+        category: newEntry.category,
       });
-      setNewEntry(''); // Clear the textarea after saving
+      setNewEntry({ title: '', content: '', category: 'General' });
     } catch (error) {
-      console.error("Error saving journal entry: ", error);
-      setError("Failed to save entry. Please check your connection and try again.");
+      console.error("Error adding entry: ", error);
     }
   };
 
-  const handleDeleteEntry = async (entryId) => {
-    if (!currentUser) return;
+  const handleUpdateEntry = async (e) => {
+    e.preventDefault();
+    if (!editingEntry || editingEntry.title.trim() === '' || editingEntry.content.trim() === '') return;
+
+    try {
+      const entryDocRef = doc(db, 'users', currentUser.uid, 'journalEntries', editingEntry.id);
+      await updateDoc(entryDocRef, {
+        title: editingEntry.title,
+        content: editingEntry.content,
+      });
+      setEditingEntry(null);
+    } catch (error) {
+      console.error("Error updating entry: ", error);
+    }
+  };
+
+  const handleDeleteEntry = async (id) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
-        try {
-            const entryRef = doc(db, 'users', currentUser.uid, 'journalEntries', entryId);
-            await deleteDoc(entryRef);
-        } catch (error) {
-            console.error("Error deleting entry:", error);
-            setError("Failed to delete entry. Please try again.");
-        }
+      try {
+        const entryDocRef = doc(db, 'users', currentUser.uid, 'journalEntries', id);
+        await deleteDoc(entryDocRef);
+      } catch (error) {
+        console.error("Error deleting entry: ", error);
+      }
     }
   };
 
   const startEditing = (entry) => {
-    setEditingId(entry.id);
-    setEditedContent(entry.content);
+    setEditingEntry({ ...entry });
   };
 
-  const handleEditChange = (e) => {
-    setEditedContent(e.target.value);
-  };
+  // --- Filtering Logic ---
+  const categories = ['All', ...new Set(entries.map(entry => entry.category || 'General'))];
+  const filteredEntries = filterCategory === 'All'
+    ? entries
+    : entries.filter(entry => (entry.category || 'General') === filterCategory);
 
-  const saveEdit = async (entryId) => {
-    try {
-      await updateDoc(doc(db, 'users', currentUser.uid, 'journalEntries', entryId), { content: editedContent });
-      setEditingId(null);
-    } catch (error) {
-      setError("Failed to update entry. Please try again.");
-    }
-  };
+  if (isLoading) {
+    return <div className="journal-container">Loading journal...</div>;
+  }
 
   return (
-    <div className="journal-page">
-      <header className="journal-header">
-        <h1><FaBookMedical /> My Prayer Journal</h1>
-        <p>A private space to record your prayers, thoughts, and God's answers.</p>
-      </header>
-      
-      <section className="journal-form-section">
-        <form onSubmit={handleSaveEntry}>
-          <textarea
-            value={newEntry}
-            onChange={(e) => setNewEntry(e.target.value)}
-            placeholder="What's on your heart today?"
-            rows="6"
-            required
-          />
-          <button type="submit" disabled={!newEntry.trim()}>Save Entry</button>
-        </form>
-      </section>
+    <div className="journal-container">
+      <h1>My Prayer Journal</h1>
 
-      <section className="journal-entries-section">
-        <h2>Past Entries</h2>
-        {loading && <p>Loading your journal...</p>}
-        {error && <p className="status-message error">{error}</p>}
-        {!loading && entries.length === 0 && (
-          <p>You have no journal entries yet. Write one above to get started!</p>
-        )}
-        <div className="entries-list">
-          {entries.map((entry) => (
-            <div key={entry.id} className="entry-card" style={{ position: 'relative' }}>
-              {editingId === entry.id ? (
-                <textarea
-                  value={editedContent}
-                  onChange={handleEditChange}
-                  className="edit-textarea"
-                />
-              ) : (
-                <p className="entry-content">{entry.content}</p>
-              )}
-              <div className="entry-actions">
-                <span className="entry-date">{entry.createdAt}</span>
-                {editingId === entry.id ? (
-                  <button
-                    onClick={() => saveEdit(entry.id)}
-                    className="edit-button save"
-                  >
-                    Save
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => startEditing(entry)}
-                    className="edit-button"
-                  >
-                    Edit
-                  </button>
-                )}
-                <button onClick={() => handleDeleteEntry(entry.id)} className="delete-button" title="Delete entry">
-                  <FaTrash />
-                </button>
+      {editingEntry ? (
+        <form onSubmit={handleUpdateEntry} className="journal-form">
+          <h2>Edit Entry</h2>
+          <input type="text" value={editingEntry.title} onChange={(e) => setEditingEntry({ ...editingEntry, title: e.target.value })} required />
+          <textarea value={editingEntry.content} onChange={(e) => setEditingEntry({ ...editingEntry, content: e.target.value })} required></textarea>
+          <div className="form-buttons">
+            <button type="submit">Save Changes</button>
+            <button type="button" onClick={() => setEditingEntry(null)}>Cancel</button>
+          </div>
+        </form>
+      ) : (
+        <form onSubmit={handleAddEntry} className="journal-form">
+          <h2>New Entry</h2>
+          <input type="text" placeholder="Title" value={newEntry.title} onChange={(e) => setNewEntry({ ...newEntry, title: e.target.value })} required />
+          <textarea placeholder="Write your prayer or reflection..." value={newEntry.content} onChange={(e) => setNewEntry({ ...newEntry, content: e.target.value })} required></textarea>
+          <select value={newEntry.category} onChange={(e) => setNewEntry({ ...newEntry, category: e.target.value })}>
+            <option value="General">General</option>
+            <option value="Prayer">Prayer</option>
+            <option value="Reflection">Reflection</option>
+            <option value="Gratitude">Gratitude</option>
+            {/* The 'Verse' category will be added automatically when saved from the devotional page */}
+          </select>
+          <button type="submit">Add Entry</button>
+        </form>
+      )}
+
+      <div className="journal-filters">
+        <span>Filter by:</span>
+        {categories.map(category => (
+          <button
+            key={category}
+            className={`filter-button ${filterCategory === category ? 'active' : ''}`}
+            onClick={() => setFilterCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      <div className="entries-list">
+        {filteredEntries.length > 0 ? (
+          filteredEntries.map(entry => (
+          <div key={entry.id} className="journal-entry">
+            <div className="entry-header">
+              <h3>{entry.title}</h3>
+              <div className="entry-meta">
+                <span className="entry-category">{entry.category || 'General'}</span>
+                <small>{entry.createdAt?.toDate().toLocaleDateString()}</small>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+            <p className="entry-content">{entry.content}</p>
+            <div className="entry-actions">
+              <button onClick={() => startEditing(entry)} className="edit-button">Edit</button>
+              <button onClick={() => handleDeleteEntry(entry.id)} className="delete-button">Delete</button>
+            </div>
+          </div>
+        ))
+        ) : (
+          <p>No entries found for this category.</p>
+        )}
+      </div>
     </div>
   );
 };
