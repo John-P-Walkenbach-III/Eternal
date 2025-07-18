@@ -1,0 +1,94 @@
+.game-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.instructions {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.verse-reference {
+  font-style: italic;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.game-board {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.answer-area {
+  min-height: 80px;
+  border: 2px dashed #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scrambled-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.word-button {
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.word-button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.word-button.answer {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.win-message {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #e8f5e9; /* Light green */
+  color: #2e7d32;
+  border-radius: 8px;
+}
+
+.win-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.game-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #ccc;
+}
+
+.game-button.primary {
+  background-color: teal;
+  color: white;
+}

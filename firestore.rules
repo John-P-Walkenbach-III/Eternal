@@ -29,6 +29,16 @@ service cloud.firestore {
                       && request.resource.data.message.size() < 2000;
     }
 
+       // LEADERBOARD: Anyone can read. Authenticated users can write their own scores.
+    // Admin can delete any score.
+    match /leaderboard/{scoreId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow delete: if request.auth.uid == 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
+    }
+
+
+
     // --- PUBLIC & SHARED DATA ---
 
     // TESTIMONIES: Anyone can read. Authenticated users can create their own.
@@ -41,6 +51,29 @@ service cloud.firestore {
     match /contacts/{contactId} {
       allow create: if true;
     }
+
+
+        // --- RE-ENTRY RESOURCE PAGES ---
+    // Allow any authenticated user to read.
+    // Allow the admin to perform all write operations (create, update, delete).
+    match /housingResources/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
+    }
+    match /employmentResources/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
+    }
+    match /counselingResources/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
+    }
+    match /spiritualResources/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
+    }
+
+
 
     // --- RE-ENTRY RESOURCE PAGES ---
     // Allow any authenticated user to read documents from these collections.

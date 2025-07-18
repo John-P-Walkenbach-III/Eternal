@@ -7,7 +7,7 @@ import {
   onSnapshot,
   orderBy,
   deleteDoc,
-  doc
+  doc, updateDoc
 } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
@@ -19,6 +19,8 @@ function PrayerJournalPage() {
   const [entries, setEntries] = useState([]);
   const [newEntry, setNewEntry] = useState('');
   const [loading, setLoading] = useState(true);
+  const [editingId, setEditingId] = useState(null);
+  const [editedContent, setEditedContent] = useState('');
   const [error, setError] = useState(null);
 
   // Fetch entries in real-time
@@ -84,6 +86,24 @@ function PrayerJournalPage() {
     }
   };
 
+  const startEditing = (entry) => {
+    setEditingId(entry.id);
+    setEditedContent(entry.content);
+  };
+
+  const handleEditChange = (e) => {
+    setEditedContent(e.target.value);
+  };
+
+  const saveEdit = async (entryId) => {
+    try {
+      await updateDoc(doc(db, 'users', currentUser.uid, 'journalEntries', entryId), { content: editedContent });
+      setEditingId(null);
+    } catch (error) {
+      setError("Failed to update entry. Please try again.");
+    }
+  };
+
   return (
     <div className="journal-page">
       <header className="journal-header">
@@ -112,16 +132,35 @@ function PrayerJournalPage() {
           <p>You have no journal entries yet. Write one above to get started!</p>
         )}
         <div className="entries-list">
-          {entries.map(entry => (
-            <div key={entry.id} className="entry-card">
-              <p className="entry-content">{entry.content}</p>
-              <div className="entry-footer">
+          {entries.map((entry) => (
+            <div key={entry.id} className="entry-card" style={{ position: 'relative' }}>
+              {editingId === entry.id ? (
+                <textarea
+                  value={editedContent}
+                  onChange={handleEditChange}
+                  className="edit-textarea"
+                />
+              ) : (
+                <p className="entry-content">{entry.content}</p>
+              )}
+              <div className="entry-actions">
                 <span className="entry-date">{entry.createdAt}</span>
-                <button 
-                  onClick={() => handleDeleteEntry(entry.id)} 
-                  className="delete-button"
-                  title="Delete entry"
-                >
+                {editingId === entry.id ? (
+                  <button
+                    onClick={() => saveEdit(entry.id)}
+                    className="edit-button save"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => startEditing(entry)}
+                    className="edit-button"
+                  >
+                    Edit
+                  </button>
+                )}
+                <button onClick={() => handleDeleteEntry(entry.id)} className="delete-button" title="Delete entry">
                   <FaTrash />
                 </button>
               </div>

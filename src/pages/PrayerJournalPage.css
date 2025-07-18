@@ -75,14 +75,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.entry-content {
-  white-space: pre-wrap; /* Preserves newlines and spaces */
-  line-height: 1.7;
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-.entry-footer {
+.entry-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,14 +83,64 @@
   font-size: 0.9rem;
 }
 
+.entry-content {
+  white-space: pre-wrap; /* Preserves newlines and spaces */
+  line-height: 1.7;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.edit-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: .8rem;
+}
+
+
+.entry-actions {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.entry-actions .edit-button,
 .delete-button {
     background: none;
     border: none;
     color: #a0a0a0;
     cursor: pointer;
-    padding: 0.25rem;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.entry-actions .edit-button:hover {
+  color: var(--secondary-color);
+}
+
+.entry-actions .edit-button.save {
+  color: var(--success-color, #5cb85c); /* You might define this color */
+}
+
+.entry-actions .edit-button.save:hover {
+  color: darken(#5cb85c, 10%); /* Darken using a function like SCSS darken */
 }
 
 .delete-button:hover {
     color: var(--error-color, #d9534f);
+}
+
+.status-message.success {
+  color: var(--success-color, #5cb85c);
 }

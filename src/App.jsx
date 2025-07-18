@@ -11,8 +11,11 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
+import GamePage from './pages/GamePage.jsx';
+import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
 import DevotionalPage from './pages/DevotionalPage.jsx';
+import AdminPage from './pages/AdminPage.jsx';
 import TestimonyPage from './pages/TestimonyPage.jsx';
 import HousingPage from './pages/HousingPage.jsx';
 import CounselingPage from './pages/CounselingPage.jsx';
@@ -59,8 +62,13 @@ function App() {
                 <li><NavLink to="/pictures">Pictures</NavLink></li>
                 {currentUser && (
                   <>
+                    <li><NavLink to="/game">Game</NavLink></li>
+                    <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
                     <li><NavLink to="/journal">Journal</NavLink></li>
                     <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
+                    {isAdmin && (
+                      <li><NavLink to="/admin">Admin</NavLink></li>
+                    )}
                   </>
                 )}
             </ul>
@@ -97,6 +105,22 @@ function App() {
           <Route path="/pictures" element={<Pictures />} />
          
           <Route
+            path="/game"
+            element={
+              <ProtectedRoute>
+                <GamePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <ProtectedRoute>
+                <LeaderboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/journal"
             element={
               <ProtectedRoute>
@@ -112,7 +136,16 @@ function App() {
               </ProtectedRoute>
             }
           />
-         
+          {isAdmin &&(
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminPage/>
+              </ProtectedRoute>
+            }
+          />
+          )}
 
 
           <Route path="/login" element={<AuthPage />} />
