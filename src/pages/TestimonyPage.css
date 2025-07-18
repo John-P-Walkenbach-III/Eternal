@@ -1,0 +1,147 @@
+.testimony-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.testimony-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.testimony-header h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--primary-color);
+}
+
+.testimony-form-section {
+  background-color: #81bef0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 25px black;
+  margin-bottom: 3rem;
+}
+
+.testimony-form-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--secondary-color);
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.testimony-form-section .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.testimony-form-section .form-group-inline {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimony-form-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.testimony-form-section textarea,
+.testimony-form-section input[type="number"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.testimony-form-section input[type="number"] {
+  width: 80px;
+}
+
+.testimony-form-section .submit-button {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.testimony-form-section .submit-button:hover{
+  background-color: rgb(27, 23, 88);
+  box-shadow: 0 5px 25px black;
+}
+
+.testimony-card {
+  background-color: #81bef0;
+  border-left: 5px solid var(--accent-color);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5rem;
+  box-shadow: 0 5px 25px black;
+}
+
+.testimony-story {
+  font-size: 1.1rem;
+  font-family: georgia;
+  line-height: 1.7;
+  font-style: italic;
+  color: #0a0a0a91;
+  font-weight: 600;
+}
+
+.testimony-meta {
+  margin-top: 1rem;
+  text-align: right;
+  color: #555;
+}
+
+.testimony-meta .author {
+  font-weight: bold;
+}
+
+.testimony-meta .details {
+  font-size: 0.9rem;
+  color: #777;
+  display: block;
+}
+.story-count {
+  text-align: center;
+  color: #666;
+  margin: -1rem 0 1.5rem 0;
+}
+
+.load-more-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.load-more-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.load-more-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.load-more-button:hover:not(:disabled) {
+    filter: brightness(90%);
+}

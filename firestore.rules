@@ -3,7 +3,17 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Rule for public contact page messages.
+    // Default rule: Deny all reads/writes unless a specific rule allows it.
+    match /{document=**} { allow read, write: if false; }
+
+    // --- USER-SPECIFIC DATA ---
+
+    // USERS collection: A user can read/write their own document.
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+       // Rule for public contact page messages.
     // Goal: Anyone can submit a message, but no one can see other messages.
     match /messages/{messageId} {
       allow read, update, delete: if false;
@@ -15,36 +25,24 @@ service cloud.firestore {
                       && request.resource.data.message.size() < 2000;
     }
 
-    // Rule for the user's Bible study progress.
-    // Goal: A user can only access their own documents.
-    match /user_progress/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-    }
-    
-    // Rules for game scores and the public leaderboard.
-    // Goal: Anyone logged in can see the leaderboard, but a user can only
-    //       update their own high score.
-    match /game_scores/{userId} {
-      // Any authenticated user can READ all scores for the leaderboard.
-      allow read: if request.auth != null;
+    // --- PUBLIC & SHARED DATA ---
 
-      // A user can WRITE to their own score document if the data is valid.
-      allow write: if request.auth.uid == userId
-        && request.resource.data.highScore is number
-        && request.resource.data.displayName is string;
+    // TESTIMONIES: Anyone can read. Authenticated users can create their own.
+    match /testimonies/{testimonyId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
     }
 
-    // Rules for the private user prayer journal.
-    // Goal: A user's entries must be completely private.
-    match /journals/{userId}/entries/{entryId} {
-      // A user can READ their own journal entries.
-      allow read: if request.auth.uid == userId;
-
-      // A user can WRITE to their own journal entry if the data is valid.
-      allow write: if request.auth.uid == userId
-        && request.resource.data.content is string
-        && request.resource.data.createdAt is timestamp;
+    // CONTACTS: Allow anyone to submit a contact form message.
+    match /contacts/{contactId} {
+      allow create: if true;
     }
+
+    // --- RE-ENTRY RESOURCE PAGES ---
+    // Allow any authenticated user to read documents from these collections.
+    match /housingResources/{docId} { allow read: if request.auth != null; }
+    match /employmentResources/{docId} { allow read: if request.auth != null; }
+    match /counselingResources/{docId} { allow read: if request.auth != null; }
+    match /spiritualResources/{docId} { allow read: if request.auth != null; }
   }
 }
-

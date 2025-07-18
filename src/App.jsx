@@ -6,23 +6,28 @@ import About from './pages/About.jsx';
 import Features from './pages/Features.jsx';
 import Contact from './pages/Contact.jsx';
 import Pictures from './pages/Pictures.jsx';
-import BibleStudy from './pages/BibleStudy.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-// import LivingWord from './pages/LivingWord.jsx';
 import { useAuth } from './context/AuthContext.jsx';
-import Dashboard from './pages/Dashboard.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
-import GamePage from './pages/GamePage.jsx';
-import LeaderboardPage from './pages/LeaderboardPage.jsx';
-import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
+import TestimonyPage from './pages/TestimonyPage.jsx';
+import HousingPage from './pages/HousingPage.jsx';
+import CounselingPage from './pages/CounselingPage.jsx';
+import SpiritualPage from './pages/SpiritualPage.jsx'; // Placeholder
+import EmploymentPage from './pages/EmploymentPage.jsx';
+import ReEntryPage from './pages/ReEntryPage.jsx';
+
 
 
 
 function App() {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+
+  // Replace 'YOUR_USER_ID_HERE' with your actual Firebase User ID
+  // For example: const isAdmin = currentUser && currentUser.uid === 'qR7pL2vgY3tF9o1abc...';
+  const isAdmin = currentUser && currentUser.uid === 'NTTcLOW3mGVko5K0BhOciM4eEYw2';
 
   const handleLogout = async () => {
     try {
@@ -47,14 +52,12 @@ function App() {
                 <li><NavLink to="/features">Features</NavLink></li>
                 <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/contact">Contact</NavLink></li>
+                <li><NavLink to="/testimonies">Testimonies</NavLink></li>
+                <li><NavLink to="/re-entry">Re-Entry</NavLink></li>
                 <li><NavLink to="/pictures">Pictures</NavLink></li>
                 {currentUser && (
                   <>
-                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-                    <li><NavLink to="/game">Game</NavLink></li>
-                    <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
-                    <li><NavLink to="/journal">Journal</NavLink></li>
-                    {/* <li><NavLink to="/living-word">The Living Word</NavLink></li> */}
+                    
                   </>
                 )}
             </ul>
@@ -82,60 +85,15 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/testimonies" element={<TestimonyPage />} />
+          <Route path="/re-entry/employment" element={<EmploymentPage />} />
+          <Route path="/re-entry/housing" element={<HousingPage />} />
+          <Route path="/re-entry/counseling" element={<CounselingPage />} />
+          <Route path="/re-entry/spiritual" element={<SpiritualPage />} />
+          <Route path="/re-entry" element={<ReEntryPage />} />
           <Route path="/pictures" element={<Pictures />} />
-          <Route
-            path="/bible-study"
-            element={
-              <ProtectedRoute>
-                <BibleStudy />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/game"
-            element={
-              <ProtectedRoute>
-                <GamePage />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/leaderboard"
-            element={
-              <ProtectedRoute>
-                <LeaderboardPage />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/journal"
-            element={
-              <ProtectedRoute>
-                <PrayerJournalPage />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* <Route
-            path="/living-word"
-            element={
-              <ProtectedRoute>
-                <LivingWord />
-              </ProtectedRoute>
-            }
-          /> */}
-
-              <Route 
-  path="/dashboard" 
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  } 
-/>
+         
+         
 
 
           <Route path="/login" element={<AuthPage />} />

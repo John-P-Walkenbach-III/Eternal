@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default rule: Deny all reads/writes unless a specific rule allows it.
+    match /{document=**} { allow read, write: if false; }
+
+    // --- USER-SPECIFIC & PRIVATE DATA ---
+
+    // USERS collection: A user can read/write their own document.
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    // JOURNAL ENTRIES (sub-collection): A user can read/write their own entries.
+    match /users/{userId}/journalEntries/{entryId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    // BIBLE STUDY PROGRESS (sub-collection): A user can read/write their own progress.
+    match /users/{userId}/bibleStudyProgress/{courseId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    // --- PUBLIC & SHARED DATA ---
+
+    // LEADERBOARD: Anyone can read. Authenticated users can write their own scores.
+    match /leaderboard/{scoreId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+
+    // --- RE-ENTRY RESOURCE PAGES ---
+    // Allow any authenticated user to read documents from these collections.
+    match /housingResources/{docId} { allow read: if request.auth != null; }
+    match /employmentResources/{docId} { allow read: if request.auth != null; }
+    match /counselingResources/{docId} { allow read: if request.auth != null; }
+    match /spiritualResources/{docId} { allow read: if request.auth != null; }
+  }
+}

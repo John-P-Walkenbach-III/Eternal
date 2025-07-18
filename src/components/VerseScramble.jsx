@@ -132,7 +132,7 @@ const VerseScramble = () => {
   const checkAnswer = () => {
     if (userAnswer.join(' ') === currentPuzzle.correct) {
       setTimerActive(false); // Stop the timer on success
-      const score = timeLeft * 10; // Calculate score
+      const score = timeLeft * 50; // Calculate score
       let feedbackMessage = `Correct! Your score: ${score}`;
       if (score > highScore) {
         feedbackMessage += " (New High Score!)";
@@ -150,7 +150,7 @@ const VerseScramble = () => {
   return (
     <div className="verse-scramble-container">
       {/* Confetti will now render within this container */}
-      {showConfetti && <Confetti width={width} height={height} />}
+      {showConfetti && <Confetti width={width} height={height}  />}
       {/* Render confetti when showConfetti is true */}
       {currentPuzzle && (
         <>

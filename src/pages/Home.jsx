@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import DailyVerse from '../components/DailyVerse.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import CoursePromo  from '../components/CoursePromo.jsx';
 
@@ -15,7 +14,6 @@ function Home() {
             <>
               <h1>Welcome back, {currentUser.displayName || currentUser.email}!</h1>
               <p className="subtitle">We're glad to have you here. Ready to continue your journey?</p>
-              <Link to="/dashboard" className="cta-button">Go to Your Dashboard</Link>
             </>
           ) : (
             <>
@@ -27,7 +25,7 @@ function Home() {
         </div>
       </section>
 
-      <DailyVerse />
+     
       <hr className="section-divider" />
 
       <CoursePromo />

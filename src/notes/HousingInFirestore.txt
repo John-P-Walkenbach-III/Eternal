@@ -1,0 +1,22 @@
+Here is a step-by-step guide to modify your code to load data from Firestore.
+
+Step 1: Create a Firestore Collection for Housing Resources
+First, you need to create a Firestore collection to store the housing resources data. Here's how:
+
+Go to your Firebase Console and click on Firestore Database in the left-hand menu.
+
+Click + Start collection.
+
+For the Collection ID, enter housingResources. Click Next.
+
+Now, click Auto-ID to create the first document. Each document will represent one housing resource.
+
+Add the following fields for each document, using appropriate data types and sample values:
+
+Field: name | Type: string | Value: The name of the organization (e.g., "A New Leaf Housing And Shelter")
+Field: description | Type: string | Value: A brief description of the services (e.g., "Provides housing and shelter...")
+Field: website | Type: string | Value: The URL of the organization's website (e.g., "https://turnanewleaf.org")
+Field: phone | Type: string | Value: The phone number of the organization (e.g., "(877) 211-8661")
+Click Save to create the document.
+
+Repeat steps 4-6 to add more housing resources to the collection. Each document should have the same fields.

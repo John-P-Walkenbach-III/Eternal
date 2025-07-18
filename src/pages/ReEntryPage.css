@@ -1,0 +1,88 @@
+.re-entry-page {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.re-entry-header {
+  text-align: center;
+  padding-bottom: 2rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.re-entry-header h1 {
+  font-size: 2.8rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.re-entry-header .page-subtitle {
+  font-size: 1.25rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.resources-section h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.resources-section > p {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.resource-card {
+  background-color: #81bef0;
+  border: 1px solid #e9e9e9;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 25px black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.resource-icon {
+  font-size: 3.5rem;
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+}
+
+.resource-card h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.resource-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.resource-link:hover {
+  text-decoration: underline;
+}
