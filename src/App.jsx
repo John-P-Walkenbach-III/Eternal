@@ -11,6 +11,8 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
+import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
+import DevotionalPage from './pages/DevotionalPage.jsx';
 import TestimonyPage from './pages/TestimonyPage.jsx';
 import HousingPage from './pages/HousingPage.jsx';
 import CounselingPage from './pages/CounselingPage.jsx';
@@ -57,7 +59,8 @@ function App() {
                 <li><NavLink to="/pictures">Pictures</NavLink></li>
                 {currentUser && (
                   <>
-                    
+                    <li><NavLink to="/journal">Journal</NavLink></li>
+                    <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
                   </>
                 )}
             </ul>
@@ -93,6 +96,22 @@ function App() {
           <Route path="/re-entry" element={<ReEntryPage />} />
           <Route path="/pictures" element={<Pictures />} />
          
+          <Route
+            path="/journal"
+            element={
+              <ProtectedRoute>
+                <PrayerJournalPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/devotional"
+            element={
+              <ProtectedRoute>
+                <DevotionalPage />
+              </ProtectedRoute>
+            }
+          />
          
 
 

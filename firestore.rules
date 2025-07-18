@@ -13,6 +13,10 @@ service cloud.firestore {
       allow read, write: if request.auth.uid == userId;
     }
 
+     match /users/{userId}/journalEntries/{entryId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
        // Rule for public contact page messages.
     // Goal: Anyone can submit a message, but no one can see other messages.
     match /messages/{messageId} {

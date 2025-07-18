@@ -1,99 +1,19 @@
 .devotional-page {
-  padding: 2rem;
-  background-color: #f4f7f6;
-}
-
-.devotional-card {
   max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 3rem;
-  border-radius: 8px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.07);
-}
-
-.devotional-title {
-  font-size: 1.7rem;
-  color: var(--primary-color);
-  text-align: center;
-  /* Helps prevent overflow from very long words */
-  word-wrap: break-word;
-  margin-bottom: 0.5rem;
-}
-
-.devotional-date {
-  text-align: center;
-  font-style: italic;
-  color: #777;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 1.5rem;
-}
-
-.scripture-section, .reflection-section {
-  margin-bottom: 2.5rem;
-}
-
-.scripture-section h2, .reflection-section h2 {
-  font-size: 1.6rem;
-  color: var(--secondary-color);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.scripture-text {
-  font-size: 1.4rem;
-  font-family: serif;
-  font-style: italic;
-  line-height: 1.6;
-  color: #333;
-  border-left: 4px solid var(--accent-color);
-  padding-left: 1.5rem;
-  margin: 0;
-}
-
-.scripture-reference {
-  display: block;
-  text-align: right;
-  margin-top: 0.5rem;
-  font-weight: bold;
-  color: #555;
-}
-
-.reflection-text {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #444;
-}
-
-.journal-cta-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  background-color: var(--accent-color);
-  color: white;
-  text-decoration: none;
+  margin: 2rem auto;
   padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: bold;
+}
+
+.devotional-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.devotional-header h1 {
+  color: var(--primary-color);
+}
+
+.devotional-content {
+  line-height: 1.7;
   font-size: 1.1rem;
-  width: fit-content;
-  margin: 2rem auto 0 auto;
-  transition: transform 0.2s ease;
-}
-
-.journal-cta-button:hover {
-  transform: translateY(-2px);
-  filter: brightness(110%);
-}
-
-/* Responsive adjustments for mobile devices */
-@media (max-width: 480px) {
-  .devotional-title {
-    /* Reduce font size on small screens */
-    font-size: 2rem;
-  }
 }
