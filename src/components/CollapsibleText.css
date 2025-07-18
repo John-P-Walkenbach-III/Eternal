@@ -1,0 +1,10 @@
+.read-more-button {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  margin-top: -0.5rem; /* Pull it closer to the text above */
+}

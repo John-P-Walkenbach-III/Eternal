@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTestimonies } from '../hooks/useTestimonies';
+import CollapsibleText from '../components/CollapsibleText.jsx';
 import { FaPenNib, FaHeart, FaSpinner } from 'react-icons/fa';
 import { GiMegaphone } from "react-icons/gi";
 import './TestimonyPage.css';
@@ -13,7 +14,6 @@ const TestimonyPage = () => {
   const [story, setStory] = useState('');
   const [ageSaved, setAgeSaved] = useState('');
   const [isBaptized, setIsBaptized] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
   const [formStatus, setFormStatus] = useState({ message: '', type: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -28,13 +28,12 @@ const TestimonyPage = () => {
         ageSaved: Number(ageSaved),
         isBaptized,
       };
-      await addTestimony(formData, profilePicture);
+      await addTestimony(formData);
       setFormStatus({ message: 'Thank you for sharing your story!', type: 'success' });
       // Reset form fields
       setStory('');
       setAgeSaved('');
       setIsBaptized(false);
-      setProfilePicture(null);
       e.target.reset(); // Resets the file input
     } catch (err) {
       console.error(err);
@@ -106,7 +105,7 @@ const TestimonyPage = () => {
           
               <span className="author">- {testimony.displayName}</span>
             </div>
-            <p className="testimony-story">"{testimony.story}"</p>
+            <CollapsibleText text={testimony.story} limit={350} />
             <div className="testimony-details">
               <span className="details">Saved at age {testimony.ageSaved} | Baptized: {testimony.isBaptized ? 'Yes' : 'No'}</span>
             </div>

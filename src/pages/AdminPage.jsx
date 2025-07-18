@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs, writeBatch } from 'firebase/firestore';
+import DevotionalManager from '../components/DevotionalManager.jsx';
+import TestimonyManager from '../components/TestimonyManager.jsx';
 import ResourceEditor from '../components/ResourceEditor.jsx';
 import './AdminPage.css';
 
@@ -48,6 +50,16 @@ function AdminPage() {
         <h2>Game Management</h2>
         <button onClick={handleResetLeaderboard} disabled={loading}>Reset Leaderboard</button>
         {status && <p className="status-message">{status}</p>}
+      </div>
+
+      <div className="admin-section">
+        <h2>Daily Devotional Management</h2>
+        <DevotionalManager />
+      </div>
+
+      <div className="admin-section">
+        <h2>Testimony Management</h2>
+        <TestimonyManager />
       </div>
 
       <div className="admin-section">
