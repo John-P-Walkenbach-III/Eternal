@@ -17,7 +17,7 @@ const DevotionalManager = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [currentDevotional, setCurrentDevotional] = useState({ date: '', title: '', content: '' });
+  const [currentDevotional, setCurrentDevotional] = useState({ date: '', title: '', content: '', featured: false });
 
   useEffect(() => {
     const q = query(collection(db, 'devotionals'), orderBy('date', 'desc'));
@@ -34,13 +34,16 @@ const DevotionalManager = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCurrentDevotional(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setCurrentDevotional(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
   const resetForm = () => {
     setIsEditing(false);
-    setCurrentDevotional({ date: '', title: '', content: '' });
+    setCurrentDevotional({ date: '', title: '', content: '', featured: false });
   };
 
   const handleSubmit = async (e) => {
@@ -75,9 +78,17 @@ const DevotionalManager = () => {
     <div className="devotional-manager">
       <h4>{isEditing ? 'Edit Devotional' : 'Add New Devotional'}</h4>
       <form onSubmit={handleSubmit}>
-        <input type="date" name="date" value={currentDevotional.date} onChange={handleInputChange} required />
-        <input type="text" name="title" value={currentDevotional.title} onChange={handleInputChange} placeholder="Title" required />
-        <textarea name="content" value={currentDevotional.content} onChange={handleInputChange} placeholder="Content" rows="10" required />
+        <div className="form-row">
+          <input type="date" name="date" value={currentDevotional.date} onChange={handleInputChange} required />
+          <input type="text" name="title" value={currentDevotional.title} onChange={handleInputChange} placeholder="Title" required />
+        </div>
+        <div className="form-group-inline">
+          <label>
+            <input type="checkbox" name="featured" checked={currentDevotional.featured || false} onChange={handleInputChange} />
+            Mark as Featured
+          </label>
+        </div>
+        <textarea name="content" value={currentDevotional.content} onChange={handleInputChange} placeholder="Content" rows="8" required />
         <div className="form-actions">
           <button type="submit">{isEditing ? 'Update Devotional' : 'Add Devotional'}</button>
           {isEditing && <button type="button" onClick={resetForm}>Cancel</button>}
@@ -91,6 +102,8 @@ const DevotionalManager = () => {
           <div key={devotional.id} className="devotional-item">
             <div className="devotional-info">
               <strong>{devotional.date}: {devotional.title}</strong>
+              {devotional.featured && <span className="featured-badge">Featured</span>}
+              <span className="like-count-badge">Likes: {devotional.likeCount || 0}</span>
               <p>{devotional.content.substring(0, 100)}...</p>
             </div>
             <div className="devotional-actions">

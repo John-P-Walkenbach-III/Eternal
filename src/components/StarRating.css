@@ -1,0 +1,5 @@
+.star-rating {
+  color: #ffc107; /* A nice gold color for the stars */
+  display: inline-flex;
+  gap: 2px;
+}

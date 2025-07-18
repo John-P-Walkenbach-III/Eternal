@@ -18,7 +18,7 @@ const ResourceEditor = ({ collectionName, title }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [currentResource, setCurrentResource] = useState({ name: '', description: '', website: '', phone: '' });
+  const [currentResource, setCurrentResource] = useState({ name: '', description: '', website: '', phone: '', rating: 0, ratingCount: 0 });
 
   useEffect(() => {
     const q = query(collection(db, collectionName), orderBy('name'));
@@ -41,7 +41,7 @@ const ResourceEditor = ({ collectionName, title }) => {
 
   const resetForm = () => {
     setIsEditing(false);
-    setCurrentResource({ name: '', description: '', website: '', phone: '' });
+    setCurrentResource({ name: '', description: '', website: '', phone: '', rating: 0, ratingCount: 0 });
   };
 
   const handleSubmit = async (e) => {
@@ -88,6 +88,8 @@ const ResourceEditor = ({ collectionName, title }) => {
           <textarea name="description" value={currentResource.description} onChange={handleInputChange} placeholder="Description" required />
           <input type="text" name="website" value={currentResource.website} onChange={handleInputChange} placeholder="Website URL" />
           <input type="text" name="phone" value={currentResource.phone} onChange={handleInputChange} placeholder="Phone Number" />
+          <input type="number" name="rating" value={currentResource.rating || 0} onChange={handleInputChange} placeholder="Total Rating Points" />
+          <input type="number" name="ratingCount" value={currentResource.ratingCount || 0} onChange={handleInputChange} placeholder="Number of Ratings" />
           <div className="form-actions">
             <button type="submit">{isEditing ? 'Update Resource' : 'Add Resource'}</button>
             {isEditing && <button type="button" onClick={resetForm}>Cancel</button>}
@@ -102,6 +104,9 @@ const ResourceEditor = ({ collectionName, title }) => {
           <div key={resource.id} className="resource-item">
             <div className="resource-info">
               <strong>{resource.name}</strong>
+              <span className="rating-display">
+                Rating: {resource.ratingCount > 0 ? (resource.rating / resource.ratingCount).toFixed(1) : 'N/A'} ({resource.ratingCount || 0} votes)
+              </span>
               <p>{resource.description}</p>
             </div>
             <div className="resource-actions">

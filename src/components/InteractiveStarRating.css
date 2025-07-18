@@ -1,0 +1,31 @@
+.interactive-star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.interactive-star-rating input[type="radio"] {
+  display: none;
+}
+
+.interactive-star-rating .star {
+  cursor: pointer;
+  transition: color 200ms;
+  font-size: 1.5rem;
+}
+
+.interactive-star-rating-placeholder {
+  height: 24px;
+  width: 120px;
+}
+
+.rate-login-prompt {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+.thank-you-message {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: #28a745;
+}

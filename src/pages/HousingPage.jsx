@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
+import StarRating from '../components/StarRating.jsx';
+import InteractiveStarRating from '../components/InteractiveStarRating.jsx';
 import { db } from '../firebase'; // Assuming your Firebase config is in firebase.js
 import { collection, getDocs } from 'firebase/firestore';
 import './ResourcePages.css'; // A new, shared stylesheet
@@ -78,13 +80,25 @@ function HousingPage() {
       <div className="resource-list">
         {!loading && filteredResources.length === 0 && <p className="no-results-message">No resources found matching your search.</p>}
         {filteredResources.map((resource, index) => (
-          <div key={index} className="resource-list-item">
-            <h3>{resource.name}</h3>
+          <div key={resource.id} className="resource-list-item">
+            <div className="resource-item-header">
+              <h3>{resource.name}</h3>
+              {resource.ratingCount > 0 && (
+                <div className="rating-container">
+                  <StarRating rating={resource.rating / resource.ratingCount} />
+                  <span className="rating-text">({resource.ratingCount})</span>
+                </div>
+              )}
+            </div>
             <p>{resource.description}</p>
             <div className="resource-contact">
               {resource.website && <a href={ensureAbsoluteUrl(resource.website)} target="_blank" rel="noopener noreferrer" className="resource-link">Visit Website</a>}
               {resource.phone && <span className="contact-separator"> | </span>}
               {resource.phone && <span>Phone: {resource.phone}</span>}
+            </div>
+            <div className="user-rating-section">
+              <p>Your rating:</p>
+              <InteractiveStarRating resourceId={resource.id} collectionName="housingResources" />
             </div>
           </div>
         ))}

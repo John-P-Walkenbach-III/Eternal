@@ -67,10 +67,20 @@
   border-bottom: none;
 }
 
+.resource-info strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
 .resource-info p {
   margin: 0.25rem 0 0 0;
   color: #555;
   font-size: 0.9rem;
+}
+
+.rating-display {
+  font-size: 0.85rem;
+  color: #666;
 }
 
 .resource-actions button {
