@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTestimonies } from '../hooks/useTestimonies';
-import CollapsibleText from '../components/CollapsibleText.jsx';
+import TestimonyItem from '../components/TestimonyItem.jsx';
 import { FaPenNib, FaHeart, FaSpinner } from 'react-icons/fa';
 import { GiMegaphone } from "react-icons/gi";
 import './TestimonyPage.css';
@@ -100,16 +100,7 @@ const TestimonyPage = () => {
         {loading && <div className="loading-container"><FaSpinner className="spinner" /> Loading...</div>}
         {error && <div className="error-container">{error}</div>}
         {testimonies.map(testimony => (
-          <div key={testimony.id} className="testimony-card">
-            <div className="testimony-card-header">
-          
-              <span className="author">- {testimony.displayName}</span>
-            </div>
-            <CollapsibleText text={testimony.story} limit={350} />
-            <div className="testimony-details">
-              <span className="details">Saved at age {testimony.ageSaved} | Baptized: {testimony.isBaptized ? 'Yes' : 'No'}</span>
-            </div>
-          </div>
+          <TestimonyItem key={testimony.id} testimony={testimony} />
         ))}
       </div>
 

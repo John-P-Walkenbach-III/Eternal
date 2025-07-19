@@ -81,6 +81,17 @@ const BibleStudyPage = () => {
       <h1>The Tests Are Currently in development. Please Be Patient</h1>
       <p>Select a topic below to begin your study and take a quiz.</p>
 
+      <div className="quiz-instructions">
+        <h3>How to Track Your Progress</h3>
+        <ol>
+          <li>Click on a quiz link below. The quiz will open in a new browser tab.</li>
+          <li>Complete the quiz in Microsoft Forms.</li>
+          <li>After submitting, you will see your score (e.g., 80%).</li>
+          <li>Return to this page and enter the number part of your score (e.g., 80) into the box next to the quiz you just took.</li>
+          <li>Click the "Save Score" button to add it to your progress tracker!</li>
+        </ol>
+      </div>
+
       {currentUser && !isLoadingProgress && (
         <div className="progress-tracker">
           <h3>Your Progress</h3>

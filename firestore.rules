@@ -3,6 +3,38 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+
+        // Add this block for testimonies
+    match /testimonies/{testimonyId} {
+      // Allow any authenticated user to read testimonies
+      allow read: if request.auth != null;
+      // Allow authenticated users to update the likeCount
+      allow update: if request.auth != null && (
+        request.resource.data.likeCount == resource.data.likeCount + 1 ||
+        request.resource.data.likeCount == resource.data.likeCount - 1
+      );
+
+      // Rules for the 'likes' subcollection
+      match /likes/{userId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+    }
+
+
+        // Add this block for testimonies
+    match /testimonies/{testimonyId} {
+      // Allow any authenticated user to read testimonies
+      allow read: if request.auth != null;
+      // Allow authenticated users to update the likeCount
+      allow update: if request.auth != null && request.resource.data.likeCount == resource.data.likeCount + 1 || request.resource.data.likeCount == resource.data.likeCount - 1;
+
+      // Rules for the 'likes' subcollection
+      match /likes/{userId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+    }
+
+
         // Add this block inside the main match /databases/{database}/documents { ... }
     match /quizScores/{scoreId} {
       // A user can read a score document if their UID matches the userId in that document.
@@ -25,10 +57,19 @@ service cloud.firestore {
     }
 
         // Add this block for devotional likes
-    match /devotionals/{verseId}/likes/{userId} {
-      // Allow a user to read, create, or delete their own like document.
-      allow read, write: if request.auth.uid == userId;
+        // This rule allows reading of verse data and secure updates for likes.
+    match /devotionals/{verseId} {
+      // Allow any authenticated user to read the verse data (like count, text, etc.)
+      allow read: if request.auth != null;
+      // Allow authenticated users to create/update documents (for the transaction)
+      allow write: if request.auth != null;
+
+      // Keep the specific rule for the likes subcollection
+      match /likes/{userId} {
+        allow read, write: if request.auth.uid == userId;
+      }
     }
+
 
 
 

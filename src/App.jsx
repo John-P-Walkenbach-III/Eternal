@@ -16,6 +16,7 @@ import BibleReaderPage from './pages/BibleReaderPage.jsx';
 import GamePage from './pages/GamePage.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import MyProgressPage from './pages/MyProgressPage.jsx';
+import HallOfFaithPage from './pages/HallOfFaithPage.jsx';
 import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
 import DevotionalPage from './pages/DevotionalPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
@@ -69,6 +70,7 @@ function App() {
                     <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
                     <li><NavLink to="/bible-study">Bible Study</NavLink></li>
                     <li><NavLink to="/my-progress">My Progress</NavLink></li>
+                    <li><NavLink to="/hall-of-faith">Hall of Faith</NavLink></li>
                     <li><NavLink to="/bible-reader">Bible Reader</NavLink></li>
                     <li><NavLink to="/journal">Journal</NavLink></li>
                     <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
@@ -155,6 +157,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyProgressPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/hall-of-faith"
+            element={
+              <ProtectedRoute>
+                <HallOfFaithPage />
               </ProtectedRoute>
             }
           />

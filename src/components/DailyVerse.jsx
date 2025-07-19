@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
-import { collection, addDoc, serverTimestamp, doc, onSnapshot, query, setDoc, deleteDoc } from 'firebase/firestore';
-import { FaSave, FaHeart } from 'react-icons/fa';
+import { collection, addDoc, serverTimestamp, doc, onSnapshot, runTransaction, increment } from 'firebase/firestore';
+import { FaSave, FaHeart, FaShare, FaCrown } from 'react-icons/fa';
 
 function DailyVerse() {
   const { currentUser } = useAuth();
@@ -14,10 +14,40 @@ function DailyVerse() {
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
+    // State for the "Share" button
+  const [copySuccess, setCopySuccess] = useState('');
+
+
   // State for the "Like" button
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
+
+
+    const handleShare = async () => {
+    if (!verse) return;
+
+    const shareText = `"${verse.text}" - ${verse.reference}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Verse of the Day',
+          text: shareText,
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      navigator.clipboard.writeText(shareText).then(() => {
+        setCopySuccess('Copied!');
+        setTimeout(() => setCopySuccess(''), 2000); // Reset after 2 seconds
+      });
+    }
+  };
+
+
 
   useEffect(() => {
     const fetchVerse = async () => {
@@ -43,27 +73,31 @@ function DailyVerse() {
   // Effect to listen for like changes in real-time
   useEffect(() => {
     if (!verse) return;
-
+ 
     const verseId = verse.reference.replace(/\s|:/g, '_'); // Sanitize for Firestore doc ID
-    const likesCollectionRef = collection(db, 'devotionals', verseId, 'likes');
-
-    // Subscribe to changes in the number of likes
-    const unsubscribeLikes = onSnapshot(query(likesCollectionRef), (snapshot) => {
-      setLikes(snapshot.size);
+    const verseDocRef = doc(db, 'devotionals', verseId);
+ 
+    // Subscribe to changes in the verse document (for likeCount)
+    const unsubscribeVerse = onSnapshot(verseDocRef, (doc) => {
+      if (doc.exists()) {
+        setLikes(doc.data().likeCount || 0);
+      } else {
+        setLikes(0);
+      }
     });
-
+ 
     // Check if the current user has liked this verse
     let unsubscribeUserLike;
     if (currentUser) {
-      const userLikeDocRef = doc(likesCollectionRef, currentUser.uid);
+      const userLikeDocRef = doc(verseDocRef, 'likes', currentUser.uid);
       unsubscribeUserLike = onSnapshot(userLikeDocRef, (doc) => {
         setIsLiked(doc.exists());
       });
     }
-
+ 
     // Cleanup subscriptions on unmount
     return () => {
-      unsubscribeLikes();
+      unsubscribeVerse();
       if (unsubscribeUserLike) unsubscribeUserLike();
     };
   }, [verse, currentUser]);
@@ -94,16 +128,36 @@ function DailyVerse() {
     setIsLiking(true);
 
     const verseId = verse.reference.replace(/\s|:/g, '_');
-    const likeDocRef = doc(db, 'devotionals', verseId, 'likes', currentUser.uid);
+    const verseDocRef = doc(db, 'devotionals', verseId);
+    const likeDocRef = doc(verseDocRef, 'likes', currentUser.uid);
 
     try {
-      if (isLiked) {
-        await deleteDoc(likeDocRef); // User is unliking
-      } else {
-        await setDoc(likeDocRef, { likedAt: serverTimestamp() }); // User is liking
-      }
+      await runTransaction(db, async (transaction) => {
+        const likeDoc = await transaction.get(likeDocRef);
+
+        if (likeDoc.exists()) {
+          // The user is unliking the verse
+          transaction.update(verseDocRef, { likeCount: increment(-1) });
+          transaction.delete(likeDocRef); // User is unliking
+        } else {
+          // The user is liking the verse
+          const verseDoc = await transaction.get(verseDocRef);
+          if (!verseDoc.exists()) {
+            // If the verse document doesn't exist, create it with the initial data.
+            transaction.set(verseDocRef, {
+              reference: verse.reference,
+              text: verse.text,
+              likeCount: 1
+            });
+          } else {
+            // Otherwise, just increment the like count.
+            transaction.update(verseDocRef, { likeCount: increment(1) });
+          }
+          transaction.set(likeDocRef, { likedAt: serverTimestamp() }); // User is liking
+        }
+      });
     } catch (error) {
-      console.error("Error liking verse:", error);
+      console.error("Like transaction failed: ", error);
       alert("Could not update like. Please try again.");
     } finally {
       setIsLiking(false);
@@ -143,13 +197,22 @@ function DailyVerse() {
       <cite className="verse-reference">{verse.reference}</cite>
       {currentUser && (
         <div className="verse-actions">
-          <button
-            onClick={handleLike}
-            disabled={isLiking}
-            className={`like-button ${isLiked ? 'liked' : ''}`}
-          >
-            <FaHeart /> {likes}
-          </button>
+          <div className="left-actions">
+            <button
+              onClick={handleLike}
+              disabled={isLiking}
+              className={`like-button ${isLiked ? 'liked' : ''}`}
+            >
+              <FaHeart /> {likes}
+            </button>
+          </div>
+          <div className="right-actions">
+            <button onClick={handleShare} className="share-button">
+              {copySuccess ? copySuccess : (
+                <><FaShare /> Share</>
+              )}
+            </button>
+          </div>
         </div>
       )}
     </section>

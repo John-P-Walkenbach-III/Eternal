@@ -1,0 +1,87 @@
+.hall-of-faith-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hall-of-faith-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.verse-leaderboard {
+  list-style: none;
+  padding: 0;
+  counter-reset: verse-rank;
+}
+
+.verse-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.verse-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.verse-card .rank {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  background-color: #007bff;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.verse-card .rank .fa-crown {
+  color: #ffc107; /* Gold color for the crown */
+}
+
+.verse-card .verse-text {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  font-style: italic;
+}
+
+.verse-card .verse-reference {
+  display: block;
+  text-align: right;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.verse-card .like-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #dc3545; /* Red for the heart */
+  font-weight: bold;
+  font-size: 1.1rem;
+  justify-content: flex-end;
+}
