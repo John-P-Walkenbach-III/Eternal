@@ -17,7 +17,7 @@ const QuizItem = ({ quiz }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Create a unique ID for this quiz for this specific user in Firestore
-  const quizDocId = currentUser ? `quiz_${currentUser.uid}_${quiz.title.replace(/\s+/g, '_')}` : null;
+  const quizDocId = currentUser ? `quiz_${currentUser.uid}_${quiz.id}` : null;
 
   useEffect(() => {
     const fetchScore = async () => {
@@ -52,7 +52,7 @@ const QuizItem = ({ quiz }) => {
     const numericScore = parseInt(score, 10);
     if (!isNaN(numericScore) && numericScore >= 0 && numericScore <= 100) {
       const quizDocRef = doc(db, 'quizScores', quizDocId);
-      await setDoc(quizDocRef, { score: numericScore, userId: currentUser.uid, quizTitle: quiz.title, completedAt: new Date() });
+      await setDoc(quizDocRef, { score: numericScore, userId: currentUser.uid, quizTitle: quiz.fullTitle, completedAt: new Date() });
       setSavedScore(numericScore);
       setIsCompleted(true);
     } else {
@@ -68,7 +68,7 @@ const QuizItem = ({ quiz }) => {
     <li className={`quiz-item ${isCompleted ? 'completed' : ''}`}>
       <div className="quiz-info">
         <a href={quiz.url} target="_blank" rel="noopener noreferrer" className="quiz-link">
-          {quiz.title}
+          {quiz.fullTitle}
         </a>
              {quiz.passage && (
           <Link to={`/bible-reader/${encodeURIComponent(quiz.passage)}`} className="study-link">

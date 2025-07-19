@@ -79,3 +79,44 @@
     padding: 1rem;
   }
 }
+
+/* Add these styles to c:\Users\johnw\Full Stack\Eternal\src\pages\BibleStudyPage.css */
+
+.progress-tracker {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e0e0e0;
+}
+
+.progress-tracker h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.progress-tracker p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.progress-bar-container {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+  background-color: #28a745; /* A nice, encouraging green */
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  line-height: 20px;
+}
