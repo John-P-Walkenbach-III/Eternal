@@ -48,6 +48,9 @@ const LifeOfChristPage = () => {
         <h1>The Life of Jesus Christ</h1>
         <p className="loc-subtitle">A journey through the most important story ever told. Discover the truth, the life, and the hope found in Him.</p>
       </div>
+      <div className="timeline-cta">
+        <Link to="/life-of-christ/timeline" className="timeline-button">View the Visual Timeline</Link>
+      </div>
       <div className="loc-topics-grid">
         {topics.map((topic) => (
           <Link to={topic.path} key={topic.title} className="loc-topic-card">

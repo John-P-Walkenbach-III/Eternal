@@ -12,6 +12,8 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import BibleStudyPage from './pages/BibleStudyPage.jsx';
 import LifeOfChristPage from './pages/LifeOfChristPage.jsx';
 import ChristTopicPage from './pages/ChristTopicPage.jsx';
+import ChristSubTopicPage from './pages/ChristSubTopicPage.jsx';
+import ChristTimelinePage from './pages/ChristTimelinePage.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
@@ -63,6 +65,7 @@ function App() {
             <ul>
                 <li><NavLink to="/">Home</NavLink></li>
                 <li><NavLink to="/life-of-christ">Life of Christ</NavLink></li>
+                <li><NavLink to="/life-of-christ/timeline">Timeline</NavLink></li>
                 <li><NavLink to="/features">Features</NavLink></li>
                 <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/contact">Contact</NavLink></li>
@@ -108,6 +111,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/life-of-christ" element={<LifeOfChristPage />} />
+          <Route path="/life-of-christ/timeline" element={<ChristTimelinePage />} />
+          <Route path="/life-of-christ/:topicId/:subTopicId" element={<ChristSubTopicPage />} />
           <Route path="/life-of-christ/:topicId" element={<ChristTopicPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />

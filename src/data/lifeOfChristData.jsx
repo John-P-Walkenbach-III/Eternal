@@ -49,16 +49,9 @@ export const lifeOfChristData = {
         type: "video",
         title: "The Parable Of The Wheat And The Weeds",
         description: "Amazing Facts President Doug Batchelor Explains This Famous Parable From Jesus' Life.",
-        source: "https://www.youtube.com/embed/sQ4gH5a3Gq4",
+        source: "https://www.youtube.com/embed/apozRYnL8KM",
         image: "/images/wheat.jpg",
       },
-
-
-      {
-        type: "article",
-        title: ""
-      },
-      // Content for ministry will go here
     ]
   },
   // In c:\Users\johnw\Full Stack\Eternal\src\data\lifeOfChristData.jsx
@@ -78,8 +71,8 @@ export const lifeOfChristData = {
       {
         type: 'video',
         title: 'The Feeding of the 5,000',
-        description: 'From the series "The Chosen" Jesus fed a massive crowd with just five loaves and two fish.',
-        source: 'https://www.youtube.com/embed/gxT8N0uJJs8?si=7CvsXO812___sHSA', // Example embed URL
+        description: 'A powerful depiction of this incredible miracle from the acclaimed series, The Chosen.',
+        source: 'https://www.youtube.com/embed/gxT8N0uJJs8', // Clip from The Chosen
         image: '/images/life-of-christ/feeding-5000.jpg'
       },
       {
