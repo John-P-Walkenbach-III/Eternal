@@ -83,5 +83,34 @@
   color: #dc3545; /* Red for the heart */
   font-weight: bold;
   font-size: 1.1rem;
-  justify-content: flex-end;
+  /* This will now be handled by the footer */
+  justify-content: flex-start;
+}
+
+.verse-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+}
+
+.verse-card .share-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #6c757d;
+  color: white;
+  border: 1px solid #6c757d;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.verse-card .share-button:hover {
+  background: #5a6268;
+  border-color: #545b62;
 }

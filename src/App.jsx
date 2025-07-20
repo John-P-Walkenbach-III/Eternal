@@ -1,5 +1,6 @@
 // We can import React if we want, but it's not strictly necessary with modern JSX transform
 import React from 'react';
+import './App.css';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
@@ -9,6 +10,8 @@ import Pictures from './pages/Pictures.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import BibleStudyPage from './pages/BibleStudyPage.jsx';
+import LifeOfChristPage from './pages/LifeOfChristPage.jsx';
+import ChristTopicPage from './pages/ChristTopicPage.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { getDisplayName } from './utils/helpers.jsx';
 import SignUp from './pages/SignUp.jsx';
@@ -18,6 +21,7 @@ import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import MyProgressPage from './pages/MyProgressPage.jsx';
 import HallOfFaithPage from './pages/HallOfFaithPage.jsx';
 import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
+import PrayerWallPage from './pages/PrayerWallPage.jsx';
 import DevotionalPage from './pages/DevotionalPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import TestimonyPage from './pages/TestimonyPage.jsx';
@@ -58,6 +62,7 @@ function App() {
         <nav>
             <ul>
                 <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink to="/life-of-christ">Life of Christ</NavLink></li>
                 <li><NavLink to="/features">Features</NavLink></li>
                 <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/contact">Contact</NavLink></li>
@@ -72,6 +77,7 @@ function App() {
                     <li><NavLink to="/my-progress">My Progress</NavLink></li>
                     <li><NavLink to="/hall-of-faith">Hall of Faith</NavLink></li>
                     <li><NavLink to="/bible-reader">Bible Reader</NavLink></li>
+                    <li><NavLink to="/prayer-wall">Prayer Wall</NavLink></li>
                     <li><NavLink to="/journal">Journal</NavLink></li>
                     <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
                     {isAdmin && (
@@ -101,6 +107,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/life-of-christ" element={<LifeOfChristPage />} />
+          <Route path="/life-of-christ/:topicId" element={<ChristTopicPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
@@ -165,6 +173,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <HallOfFaithPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/prayer-wall"
+            element={
+              <ProtectedRoute>
+                <PrayerWallPage />
               </ProtectedRoute>
             }
           />

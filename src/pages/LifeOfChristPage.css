@@ -1,0 +1,160 @@
+.life-of-christ-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loc-header {
+  margin-bottom: 3rem;
+}
+
+.loc-header h1 {
+  font-size: 3rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.loc-subtitle {
+  font-size: 1.25rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.loc-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.loc-topic-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loc-topic-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.loc-topic-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.loc-topic-card h3 {
+  font-size: 1.5rem;
+  color: #0056b3;
+  margin-bottom: 0.75rem;
+}
+
+.loc-topic-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Styles for the detailed topic pages */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.content-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.content-card .card-image {
+  width: 100%;
+  height: 299px;
+  object-fit: cover;
+}
+
+.content-card .card-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.content-card h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.content-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.content-card .card-source {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Video Card Specifics */
+.video-card {
+  padding: 1.5rem;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+

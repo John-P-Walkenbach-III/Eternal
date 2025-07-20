@@ -23,3 +23,110 @@
   cursor: pointer;
   font-weight: bold;
 }
+ 
+
+.manager-container {
+  margin-top: 1rem;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.manager-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.manager-item {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.manager-item .item-info {
+  flex-grow: 1;
+  word-break: break-word;
+}
+
+.manager-item .item-info p {
+  margin: 0.5rem 0;
+  font-style: italic;
+  color: #555;
+}
+
+.manager-item .item-info strong {
+  color: #0056b3;
+}
+
+.manager-item .delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.manager-item .delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Add these styles to c:\Users\johnw\Full Stack\Eternal\src\pages\AdminPage.css */
+
+.admin-form {
+  background: #f0f2f5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+}
+
+.admin-form h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.admin-form p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.admin-form input,
+.admin-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.admin-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.admin-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-form button:hover:not(:disabled) {
+  background-color: #0056b3;
+}

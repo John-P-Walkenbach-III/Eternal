@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
-import { FaHeart, FaCrown } from 'react-icons/fa';
+import HallOfFaithVerse from '../components/HallOfFaithVerse.jsx';
 import './HallOfFaithPage.css';
 
 const HallOfFaithPage = () => {
@@ -46,12 +46,7 @@ const HallOfFaithPage = () => {
       <p className="subtitle">The top 10 most-liked verses, chosen by the community.</p>
       <ol className="verse-leaderboard">
         {topVerses.map((verse, index) => (
-          <li key={verse.id} className="verse-card">
-            <span className="rank">{index === 0 ? <FaCrown /> : `#${index + 1}`}</span>
-            <blockquote className="verse-text">"{verse.text}"</blockquote>
-            <cite className="verse-reference">{verse.reference}</cite>
-            <div className="like-count"><FaHeart /> {verse.likeCount}</div>
-          </li>
+          <HallOfFaithVerse key={verse.id} verse={verse} index={index} />
         ))}
       </ol>
     </div>

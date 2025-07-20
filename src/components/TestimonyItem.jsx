@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { doc, onSnapshot, runTransaction, increment } from 'firebase/firestore';
-import { FaHandsHelping } from 'react-icons/fa';
+import { FaHandsHelping, FaShare } from 'react-icons/fa';
 import CollapsibleText from './CollapsibleText.jsx';
 
 const TestimonyItem = ({ testimony }) => {
@@ -10,6 +10,7 @@ const TestimonyItem = ({ testimony }) => {
   const [amenCount, setAmenCount] = useState(testimony.likeCount || 0);
   const [isAmen, setIsAmen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [copySuccess, setCopySuccess] = useState('');
 
   const testimonyDocRef = doc(db, 'testimonies', testimony.id);
 
@@ -60,6 +61,29 @@ const TestimonyItem = ({ testimony }) => {
     }
   };
 
+  const handleShare = async () => {
+    if (!testimony) return;
+
+    const shareText = `"${testimony.story}" - ${testimony.displayName}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'An Inspiring Testimony from Eternal Life Ministry',
+          text: shareText,
+        });
+      } catch (error) {
+        console.error('Error sharing testimony:', error);
+      }
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      navigator.clipboard.writeText(shareText).then(() => {
+        setCopySuccess('Copied!');
+        setTimeout(() => setCopySuccess(''), 2000);
+      });
+    }
+  };
+
   return (
     <div className="testimony-card">
       <div className="testimony-card-header">
@@ -73,6 +97,11 @@ const TestimonyItem = ({ testimony }) => {
         <div className="testimony-actions">
           <button onClick={handleAmen} disabled={isProcessing} className={`amen-button ${isAmen ? 'active' : ''}`}>
             <FaHandsHelping /> {amenCount} Amen{amenCount !== 1 ? 's' : ''}
+          </button>
+          <button onClick={handleShare} className="share-button">
+            {copySuccess ? copySuccess : (
+              <><FaShare /> Share</>
+            )}
           </button>
         </div>
       )}

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTestimonies } from '../hooks/useTestimonies';
+import { db } from '../firebase';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import TestimonyItem from '../components/TestimonyItem.jsx';
 import { FaPenNib, FaHeart, FaSpinner } from 'react-icons/fa';
 import { GiMegaphone } from "react-icons/gi";
@@ -16,6 +18,23 @@ const TestimonyPage = () => {
   const [isBaptized, setIsBaptized] = useState(false);
   const [formStatus, setFormStatus] = useState({ message: '', type: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [topTestimonies, setTopTestimonies] = useState([]);
+
+  // Effect to fetch the most "Amen'd" testimonies
+  useEffect(() => {
+    const fetchTopTestimonies = async () => {
+      try {
+        const testimoniesRef = collection(db, 'testimonies');
+        const q = query(testimoniesRef, orderBy('likeCount', 'desc'), limit(3));
+        const querySnapshot = await getDocs(q);
+        const top = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setTopTestimonies(top);
+      } catch (error) {
+        console.error("Error fetching top testimonies:", error);
+      }
+    };
+    fetchTopTestimonies();
+  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +68,21 @@ const TestimonyPage = () => {
         <h1><FaHeart color='red' /> Share Your Story</h1>
         <p>Read inspiring testimonies from our community and share your own journey of faith.</p>
       </div>
+
+      {topTestimonies.length > 0 && (
+        <div className="most-encouraged-section">
+          <h2>Most Encouraged Stories</h2>
+          <div className="top-testimonies-grid">
+            {topTestimonies.map(testimony => (
+              <div key={testimony.id} className="top-testimony-card">
+                <p className="top-testimony-story">"{testimony.story.substring(0, 150)}..."</p>
+                <span className="top-testimony-author">- {testimony.displayName}</span>
+                <div className="top-testimony-amens"><FaHeart /> {testimony.likeCount}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {currentUser && (
         <div className="testimony-form-section">

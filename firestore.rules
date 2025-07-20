@@ -4,6 +4,26 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
 
+        // Add this block for the Prayer Wall
+    match /prayerRequests/{requestId} {
+      // Any authenticated user can read prayer requests
+      allow read: if request.auth != null;
+      // Users can create a request for themselves
+      allow create: if request.auth.uid == request.resource.data.userId;
+      // Users can update the prayCount
+       allow update: if request.auth != null && (
+        request.resource.data.prayCount == resource.data.prayCount + 1 ||
+        request.resource.data.prayCount == resource.data.prayCount - 1
+      );
+
+      // Rules for the 'prayers' subcollection
+      match /prayers/{userId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+    }
+
+
+
         // Add this block for testimonies
     match /testimonies/{testimonyId} {
       // Allow any authenticated user to read testimonies

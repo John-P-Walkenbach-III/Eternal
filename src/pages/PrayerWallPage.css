@@ -1,0 +1,181 @@
+.prayer-wall-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.prayer-wall-container h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+.prayer-form {
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  border: 1px solid #e0e0e0;
+}
+
+.prayer-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.form-footer label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.prayer-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.prayer-form button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.requests-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.prayer-request-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.prayer-request-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+}
+
+.prayer-request-author {
+  display: block;
+  text-align: right;
+  font-weight: 600;
+  color: #555;
+  font-style: italic;
+}
+
+.prayer-actions {
+  margin-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.pray-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.pray-button.active,
+.pray-button:hover:not(:disabled) {
+  background: #d4edda; /* A gentle green */
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.pray-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+/* Add these styles to c:\Users\johnw\Full Stack\Eternal\src\pages\PrayerWallPage.css */
+
+.most-prayed-for-section {
+  background: #f8f9fa;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.most-prayed-for-section h2 {
+  font-size: 2rem;
+  color: #343a40;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.top-requests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.top-request-card {
+  background: #81bef0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.top-request-text {
+  font-style: italic;
+  color: #555;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.top-request-author {
+  font-weight: bold;
+  color: #333;
+  align-self: flex-end;
+}
+
+.top-request-prayers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #007bff;
+  font-weight: bold;
+  margin-top: 1rem;
+  align-self: flex-end;
+}
