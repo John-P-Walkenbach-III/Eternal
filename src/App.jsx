@@ -1,6 +1,9 @@
 // We can import React if we want, but it's not strictly necessary with modern JSX transform
 import React from 'react';
 import './App.css';
+import { NotificationProvider, useNotification } from './context/NotificationContext.jsx';
+import Notification from './components/Notification.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
@@ -29,12 +32,21 @@ import AdminPage from './pages/AdminPage.jsx';
 import TestimonyPage from './pages/TestimonyPage.jsx';
 import HousingPage from './pages/HousingPage.jsx';
 import CounselingPage from './pages/CounselingPage.jsx';
+import DashboardPage from './pages/DashboardPage.jsx';
+import AchievementsPage from './pages/AchievementsPage.jsx';
 import SpiritualPage from './pages/SpiritualPage.jsx'; // Placeholder
 import EmploymentPage from './pages/EmploymentPage.jsx';
 import ReEntryPage from './pages/ReEntryPage.jsx';
 
-
-
+// This new component will live inside the provider and can access the context
+function NotificationsDisplay() {
+  const { notifications } = useNotification();
+  return (
+    <div className="notification-container">
+      {notifications.map(n => <Notification key={n.id} message={n.message} type={n.type} />)}
+    </div>
+  );
+}
 
 function App() {
   const { currentUser, logout } = useAuth();
@@ -55,7 +67,9 @@ function App() {
 
   return (
     // React Fragments (<> ... </>) let us return multiple elements
-    <>
+    <NotificationProvider>
+      <ScrollToTop />
+      <NotificationsDisplay /> {/* This component renders the notifications */}
       <header className="site-header">
         <div className="logo-container">
             {/* The path to images in the `public` folder is relative to the root */}
@@ -76,13 +90,14 @@ function App() {
                   <>
                     <li><NavLink to="/game">Game</NavLink></li>
                     <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
-                    <li><NavLink to="/bible-study">Bible Study</NavLink></li>
+                    <li><NavLink to="/dashboard">My Dashboard</NavLink></li>
                     <li><NavLink to="/my-progress">My Progress</NavLink></li>
                     <li><NavLink to="/hall-of-faith">Hall of Faith</NavLink></li>
                     <li><NavLink to="/bible-reader">Bible Reader</NavLink></li>
                     <li><NavLink to="/prayer-wall">Prayer Wall</NavLink></li>
                     <li><NavLink to="/journal">Journal</NavLink></li>
                     <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
+                    <li><NavLink to="/achievements">Achievements</NavLink></li>
                     {isAdmin && (
                       <li><NavLink to="/admin">Admin</NavLink></li>
                     )}
@@ -166,6 +181,14 @@ function App() {
             }
           />
           <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/my-progress"
             element={
               <ProtectedRoute>
@@ -186,6 +209,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <PrayerWallPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/achievements"
+            element={
+              <ProtectedRoute>
+                <AchievementsPage />
               </ProtectedRoute>
             }
           />
@@ -225,7 +256,7 @@ function App() {
       <footer>
           <p>&copy; {new Date().getFullYear()} Eternal Life Ministry. All rights reserved.</p>
       </footer>
-    </>
+    </NotificationProvider>
   )
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { doc, onSnapshot, runTransaction, increment } from 'firebase/firestore';
-import { FaPrayingHands } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 
 const PrayerRequestItem = ({ request }) => {
   const { currentUser } = useAuth();
@@ -64,7 +64,7 @@ const PrayerRequestItem = ({ request }) => {
       <cite className="prayer-request-author">- {request.displayName || 'Anonymous'}</cite>
       <div className="prayer-actions">
         <button onClick={handlePray} disabled={isProcessing} className={`pray-button ${hasPrayed ? 'active' : ''}`}>
-          <FaPrayingHands /> {hasPrayed ? "You're Praying" : "I'll Pray"} ({prayCount})
+          <FaHeart /> {hasPrayed ? "Liked" : "Like"} ({prayCount})
         </button>
       </div>
     </div>

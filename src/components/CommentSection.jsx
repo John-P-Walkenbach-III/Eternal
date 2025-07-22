@@ -9,7 +9,8 @@ import {
   addDoc,
   serverTimestamp,
   doc,
-  deleteDoc
+  deleteDoc,
+  runTransaction
 } from 'firebase/firestore';
 import './CommentSection.css';
 
@@ -18,6 +19,7 @@ const CommentSection = ({ docId, collectionName }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   // Admin check
@@ -48,20 +50,39 @@ const CommentSection = ({ docId, collectionName }) => {
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
-    if (!currentUser || !newComment.trim()) return;
+    if (!currentUser || !newComment.trim() || isSubmitting) return;
+    setIsSubmitting(true);
+    setError('');
 
-    const commentsRef = collection(db, collectionName, docId, 'comments');
+    const discussionDocRef = doc(db, collectionName, docId);
+    const commentsRef = collection(discussionDocRef, 'comments');
+
     try {
-      await addDoc(commentsRef, {
-        text: newComment,
-        userId: currentUser.uid,
-        displayName: currentUser.displayName || currentUser.email,
-        createdAt: serverTimestamp()
+      // Use a transaction to ensure the parent document exists before adding a comment
+      await runTransaction(db, async (transaction) => {
+        const discussionDoc = await transaction.get(discussionDocRef);
+        if (!discussionDoc.exists()) {
+          // Create the parent document if it doesn't exist
+          transaction.set(discussionDocRef, {
+            createdAt: serverTimestamp(),
+          });
+        }
+
+        // Now add the new comment document to the subcollection
+        const newCommentRef = doc(commentsRef);
+        transaction.set(newCommentRef, {
+          text: newComment,
+          userId: currentUser.uid,
+          displayName: currentUser.displayName || currentUser.email,
+          createdAt: serverTimestamp()
+        });
       });
       setNewComment('');
     } catch (err) {
       console.error("Error adding comment:", err);
       setError("Could not post comment. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -85,7 +106,7 @@ const CommentSection = ({ docId, collectionName }) => {
             rows="3"
             required
           />
-          <button type="submit" disabled={!newComment.trim()}>Post Comment</button>
+          <button type="submit" disabled={!newComment.trim() || isSubmitting}>{isSubmitting ? 'Posting...' : 'Post Comment'}</button>
         </form>
       ) : (
         <p>Please log in to leave a comment.</p>

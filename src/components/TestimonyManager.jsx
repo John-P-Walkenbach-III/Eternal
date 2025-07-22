@@ -1,112 +1,118 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import {
-  collection,
-  onSnapshot,
-  deleteDoc,
-  updateDoc,
-  doc,
-  query,
-  orderBy
-} from 'firebase/firestore';
-import './TestimonyManager.css';
+import { collection, getDocs, doc, updateDoc, deleteDoc, orderBy, query } from 'firebase/firestore';
 
 const TestimonyManager = () => {
   const [testimonies, setTestimonies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [expandedIds, setExpandedIds] = useState(new Set());
+  const [editingTestimony, setEditingTestimony] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    const q = query(collection(db, 'testimonies'), orderBy('createdAt', 'desc'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const items = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        createdAt: doc.data().createdAt?.toDate().toLocaleDateString() || 'N/A'
-      }));
-      setTestimonies(items);
-      setLoading(false);
-    }, (err) => {
-      console.error("Error fetching testimonies:", err);
-      setError("Failed to load testimonies.");
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleApprove = async (id) => {
+  const fetchTestimonies = async () => {
+    setLoading(true);
     setError('');
     try {
-      const testimonyDoc = doc(db, 'testimonies', id);
-      await updateDoc(testimonyDoc, { approved: true });
+      const testimoniesRef = collection(db, 'testimonies');
+      const q = query(testimoniesRef, orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      const testimonyList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setTestimonies(testimonyList);
     } catch (err) {
-      console.error("Error approving testimony:", err);
-      setError("Failed to approve testimony.");
+      console.error("Error fetching testimonies:", err);
+      setError("Failed to load testimonies. You may need to create a Firestore index for 'testimonies' ordered by 'createdAt' descending.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this testimony permanently?")) {
+  useEffect(() => {
+    fetchTestimonies();
+  }, []);
+
+  const handleUpdateTestimony = async (e) => {
+    e.preventDefault();
+    if (!editingTestimony) return;
+    setIsSubmitting(true);
+
+    try {
+      const testimonyRef = doc(db, 'testimonies', editingTestimony.id);
+      await updateDoc(testimonyRef, {
+        story: editingTestimony.story,
+        displayName: editingTestimony.displayName,
+        ageSaved: Number(editingTestimony.ageSaved),
+        isBaptized: editingTestimony.isBaptized,
+      });
+      setEditingTestimony(null);
+      fetchTestimonies();
+    } catch (err) {
+      console.error("Error updating testimony:", err);
+      alert("Failed to update testimony.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteTestimony = async (id) => {
+    if (window.confirm("Are you sure you want to permanently delete this testimony?")) {
       try {
         await deleteDoc(doc(db, 'testimonies', id));
+        fetchTestimonies();
       } catch (err) {
         console.error("Error deleting testimony:", err);
-        setError("Failed to delete testimony.");
+        alert("Failed to delete testimony.");
       }
     }
   };
 
-  const toggleExpand = (id) => {
-    setExpandedIds(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
-  };
+  if (loading) return <p>Loading testimonies...</p>;
+  if (error) return <p className="status-message error">{error}</p>;
+
+  if (editingTestimony) {
+    return (
+      <div className="manager-container">
+        <form onSubmit={handleUpdateTestimony} className="admin-form">
+          <h4>Editing Testimony by {editingTestimony.displayName}</h4>
+          <label>Display Name</label>
+          <input type="text" value={editingTestimony.displayName} onChange={(e) => setEditingTestimony({ ...editingTestimony, displayName: e.target.value })} required />
+          <label>Story</label>
+          <textarea value={editingTestimony.story} onChange={(e) => setEditingTestimony({ ...editingTestimony, story: e.target.value })} required />
+          <label>Age Saved</label>
+          <input type="number" value={editingTestimony.ageSaved} onChange={(e) => setEditingTestimony({ ...editingTestimony, ageSaved: e.target.value })} required />
+          <label className="admin-checkbox-label">
+            <input type="checkbox" checked={!!editingTestimony.isBaptized} onChange={(e) => setEditingTestimony({ ...editingTestimony, isBaptized: e.target.checked })} />
+            Baptized
+          </label>
+          <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Saving...' : 'Save Changes'}</button>
+          <button type="button" onClick={() => setEditingTestimony(null)} className="cancel-button">Cancel</button>
+        </form>
+      </div>
+    );
+  }
 
   return (
-    <div className="testimony-manager">
-      {loading && <p>Loading testimonies...</p>}
-      {error && <p className="status-message error">{error}</p>}
-      <div className="testimony-list">
+    <div className="manager-container">
+      <ul className="manager-list">
         {testimonies.map(testimony => (
-          <div key={testimony.id} className={`testimony-item ${testimony.approved ? 'approved' : 'pending'}`}>
-            <div className="testimony-content"> 
-              <blockquote>
-                {expandedIds.has(testimony.id) || testimony.story.length < 250
-                  ? `"${testimony.story}"`
-                  : `"${testimony.story.substring(0, 250)}..."`
-                }
-              </blockquote>
-              <cite>- {testimony.displayName || 'Anonymous'} on {testimony.createdAt}</cite> 
-              {testimony.story.length >= 250 && (
-                <button onClick={() => toggleExpand(testimony.id)} className="expand-button">
-                  {expandedIds.has(testimony.id) ? 'Show Less' : 'Show More'}
-                </button>
-              )}
-            </div> 
-            <div className="testimony-actions">
-              <span className={`status ${testimony.approved ? 'approved' : 'pending'}`}>
-                {testimony.approved ? 'Approved' : 'Pending'}
-              </span>
-              <div className="action-buttons">
-                {!testimony.approved && (
-                  <button onClick={() => handleApprove(testimony.id)} className="approve">Approve</button>
-                )}
-                <button onClick={() => handleDelete(testimony.id)} className="delete">Delete</button>
+          <li key={testimony.id} className="manager-item">
+            <div className="item-info">
+              <strong>By: {testimony.displayName}</strong> (Saved at {testimony.ageSaved})
+              <p>"{testimony.story}"</p>
+              <div className="item-meta">
+                <span>Amens: {testimony.likeCount || 0}</span>
+                <span>Baptized: {testimony.isBaptized ? 'Yes' : 'No'}</span>
               </div>
             </div>
-          </div>
+            <div className="item-actions">
+              <button onClick={() => setEditingTestimony(testimony)} className="edit-button">Edit</button>
+              <button onClick={() => handleDeleteTestimony(testimony.id)} className="delete-button">Delete</button>
+            </div>
+          </li>
         ))}
-        {!loading && testimonies.length === 0 && <p>No testimonies submitted yet.</p>}
-      </div>
+      </ul>
     </div>
   );
 };
 
 export default TestimonyManager;
+

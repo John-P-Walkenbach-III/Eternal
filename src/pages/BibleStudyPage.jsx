@@ -86,8 +86,8 @@ const BibleStudyPage = () => {
         <ol>
           <li>Click on a quiz link below. The quiz will open in a new browser tab.</li>
           <li>Complete the quiz in Microsoft Forms.</li>
-          <li>After submitting, you will see your score (e.g., 80%).</li>
-          <li>Return to this page and enter the number part of your score (e.g., 80) into the box next to the quiz you just took.</li>
+          <li>After submitting, you will see your score (e.g., 80%) at the top of the form.</li>
+          <li>Return to this page and enter the number part of your score (e.g., 80) into the box("Enter Score %") next to the quiz you just took.</li>
           <li>Click the "Save Score" button to add it to your progress tracker!</li>
         </ol>
       </div>

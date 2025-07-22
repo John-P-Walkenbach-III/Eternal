@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs, getDoc, deleteDoc, doc, orderBy, query, runTransaction, serverTimestamp, writeBatch, where } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, orderBy, query, runTransaction, serverTimestamp, writeBatch, where } from 'firebase/firestore';
 
 const DevotionalManager = () => {
   const [devotionals, setDevotionals] = useState([]);

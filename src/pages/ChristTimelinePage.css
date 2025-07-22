@@ -65,12 +65,13 @@
 }
 
 .timeline-content {
-  padding: 20px 30px;
+  padding: 20px 15px;
   background-color: #81bef0;
   position: relative;
   border-radius: 8px;
   box-shadow: 0 4px 25px black;
   text-align: left;
+  font-size: smaller;
 }
 .timeline-content:hover{
 box-shadow: 0 5px 25px teal;
@@ -80,15 +81,16 @@ box-shadow: 0 5px 25px teal;
 }
 
 .timeline-icon {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   position: absolute;
   top: 15px;
-  right: 20px;
+  right: 10px;
 }
 
 .timeline-content h2 {
   margin-top: 0;
-  color: #333;
+  color: #0a0a0a;
+  font-weight: 600;
 }
 
 .timeline-link {

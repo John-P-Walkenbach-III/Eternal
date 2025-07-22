@@ -1,24 +1,5 @@
 export const bibleStudyTopics = [
-  {
-    category: "Old Testament",
-    books: [
-      {
-        name: "Genesis",
-        quizzes: [
-          { title: "Quiz 1: The Creation", url: "https://forms.microsoft.com/r/your-quiz-id-here", passage: "Genesis 1" },
-          { title: "Quiz 2: Adam and Eve", url: "https://forms.microsoft.com/r/your-quiz-id-here", passage: "Genesis 2" },
-          // You can continue adding your Genesis quizzes here
-        ]
-      },
-      {
-        name: "Exodus",
-        quizzes: [
-          { title: "Quiz 1: The Plagues", url: "https://forms.microsoft.com/r/your-quiz-id-here", passage: "Exodus 1" },
-          // ...and so on
-        ]
-      },
-    ]
-  },
+  
 
   // Book of Matthew 1-28
   {
@@ -31,12 +12,12 @@ export const bibleStudyTopics = [
           { title: "Chapter 2", url: "https://forms.office.com/r/xzJKdtxQ09?embed=true", passage: "Matthew 2" },
           { title: "Chapter 3", url: "https://forms.office.com/r/VY9yxXqhqA?embed=true", passage: "Matthew 3" },
           { title: "Chapter 4", url: "https://forms.office.com/r/rGYxumvhdK?embed=true", passage: "Matthew 4" },
-          { title: "Chapter 5", url: "", passage: "Matthew 5" },
-          { title: "Chapter 6", url: "", passage: "Matthew 6" },
-          { title: "Chapter 7", url: "", passage: "Matthew 7" },
-          { title: "Chapter 8", url: "", passage: "Matthew 8" },
-          { title: "Chapter 9", url: "", passage: "Matthew 9" },
-          { title: "Chapter 10", url: "", passage: "Matthew 10" },
+          { title: "Chapter 5", url: "https://forms.office.com/r/5j1CczGRhC?embed=true", passage: "Matthew 5" },
+          { title: "Chapter 6", url: "https://forms.office.com/r/5ASeWA2Kjr?embed=true", passage: "Matthew 6" },
+          { title: "Chapter 7", url: "https://forms.office.com/r/UaewUCLsLd?embed=true", passage: "Matthew 7" },
+          { title: "Chapter 8", url: "https://forms.office.com/r/ZJ8tVVqFLy?embed=true", passage: "Matthew 8" },
+          { title: "Chapter 9", url: "https://forms.office.com/r/47xu3Lay4L?embed=true", passage: "Matthew 9" },
+          { title: "Chapter 10", url: "https://forms.office.com/r/CUSqPqrryw?embed=true", passage: "Matthew 10" },
           { title: "Chapter 11", url: "", passage: "Matthew 11" },
           { title: "Chapter 12", url: "", passage: "Matthew 12" },
           { title: "Chapter 13", url: "", passage: "Matthew 13" },
@@ -59,6 +40,9 @@ export const bibleStudyTopics = [
         ]
       },
       //  Book Of Mark Chapters 1-16 Quizzes 29-44
+         
+     
+
       {
         name: "Mark",
         quizzes: [
@@ -174,7 +158,7 @@ export const bibleStudyTopics = [
             { title: "Chapter 27", url: "", passage: "Acts 27" },
             { title: "Chapter 28", url: "", passage: "Acts 28" },
           ]
-        }
+        },
     ]
   }
 ]

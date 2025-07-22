@@ -34,7 +34,7 @@
 .site-header nav ul {
   display: grid;
   /* This creates a responsive grid. It will fit as many 150px columns as it can. */
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 9px; /* The space between the "graph paper" cells */
   list-style: none;
   padding: 0;
@@ -55,6 +55,7 @@
   box-shadow: 0 4px 25px black;
   
 }
+
 
 .site-header nav li a:hover,
 .site-header nav li a.active {
@@ -88,8 +89,21 @@
 
 
 .logo {
-  height: 380px; /* Adjust as needed */
+  height: auto; /* Adjust as needed */
+  width: 300px;
 }
 
+
+
+
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 

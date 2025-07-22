@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { lifeOfChristData } from '../data/lifeOfChristData.jsx'; // Import the data
 import './LifeOfChristPage.css'; // Reuse the same CSS for a consistent look
+import CommentSection from '../components/CommentSection.jsx';
 
 const ChristTopicPage = () => {
   const { topicId } = useParams();
@@ -81,6 +82,11 @@ const ChristTopicPage = () => {
       <div className="content-grid">
         {topicData.content.map(renderContentItem)}
       </div>
+
+      <div className="page-comment-section">
+        <CommentSection collectionName="discussions" docId={`loc_${topicId}`} />
+      </div>
+
       <Link to="/life-of-christ" className="back-link">← Back to Life of Christ Overview</Link>
     </div>
   );
