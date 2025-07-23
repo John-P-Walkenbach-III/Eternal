@@ -106,4 +106,47 @@
   gap: 10px;
 }
 
+/* --- Footer Styles --- */
+footer {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 1.5rem 2rem;
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* General Body & App Layout */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: #adb5bd;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+main {
+  flex-grow: 1; /* This makes the main content area take up available space */
+  padding: 2rem;
+  max-width: 100%;
+}
+
+
+
 

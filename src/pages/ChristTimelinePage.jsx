@@ -6,9 +6,21 @@ import './ChristTimelinePage.css';
 const timelineEvents = [
   {
     title: "The Prophecies and His Birth",
-    description: "Explore the ancient prophecies and the miraculous story of His birth.",
+    description: "Explore the ancient prophecies that foretold His coming and the miraculous story of His birth.",
     path: "/life-of-christ/birth",
-    icon: "🌟"
+    icon: "🌟",
+    subEvents: [
+      {
+        title: "The Annunciation",
+        description: "The angel Gabriel announces to Mary that she will conceive and bear the Son of God.",
+        path: "/life-of-christ/birth/annunciation" // This page doesn't exist yet, but you can create it later
+      },
+      {
+        title: "The Visit of the Magi",
+        description: "Wise men from the East follow a star to worship the newborn King, presenting Him with gifts.",
+        path: "/life-of-christ/birth/magi" // This page doesn't exist yet
+      }
+    ]
   },
   {
     title: "His Life and Ministry",
@@ -54,6 +66,18 @@ const ChristTimelinePage = () => {
               <h2>{event.title}</h2>
               <p>{event.description}</p>
               <Link to={event.path} className="timeline-link">Learn More →</Link>
+              {/* --- New Section to Render Sub-Events --- */}
+              {event.subEvents && (
+                <ul className="sub-events-list">
+                  {event.subEvents.map((subEvent, subIndex) => (
+                    <li key={subIndex} className="sub-event-item">
+                      <h3>{subEvent.title}</h3>
+                      <p>{subEvent.description}</p>
+                      {/* You can add a link here if the sub-event has its own page */}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         ))}

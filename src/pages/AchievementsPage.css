@@ -19,7 +19,7 @@
 
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem;
 }
 
@@ -27,9 +27,9 @@
   background: #81bef0;
   border-radius: 12px;
   padding: 1.5rem;
-  display: flex;
+  display: flex; 
   align-items: center;
-  /* gap: 1.rem; */
+  gap: 1.5rem;
   border: 1px solid #e0e0e0;
   position: relative;
   overflow: hidden;
@@ -55,6 +55,10 @@
   line-height: 1;
 }
 
+.achievement-details {
+  flex: 1; /* Allow details to fill the remaining space */
+}
+
 .achievement-details h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
@@ -67,12 +71,31 @@
 
 .unlocked-badge {
   position: absolute;
-  top: 10px;
-  right: -30px;
+  top: 15px;
+  right: -35px;
   background: #28a745;
   color: white;
-  padding: 0.25rem 2rem;
+  padding: 0.25rem 1.5rem;
   font-size: 0.8rem;
   font-weight: bold;
   transform: rotate(45deg);
+}
+
+.share-button {
+  position: absolute;
+  bottom: 2px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.share-button:hover {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }

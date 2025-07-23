@@ -4,7 +4,7 @@ import './App.css';
 import { NotificationProvider, useNotification } from './context/NotificationContext.jsx';
 import Notification from './components/Notification.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
-import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
+import { Routes, Route, NavLink, useNavigate, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Features from './pages/Features.jsx';
@@ -25,7 +25,6 @@ import GamePage from './pages/GamePage.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
 import MyProgressPage from './pages/MyProgressPage.jsx';
 import HallOfFaithPage from './pages/HallOfFaithPage.jsx';
-import PrayerJournalPage from './pages/PrayerJournalPage.jsx';
 import PrayerWallPage from './pages/PrayerWallPage.jsx';
 import DevotionalPage from './pages/DevotionalPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
@@ -33,9 +32,11 @@ import TestimonyPage from './pages/TestimonyPage.jsx';
 import HousingPage from './pages/HousingPage.jsx';
 import CounselingPage from './pages/CounselingPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 import AchievementsPage from './pages/AchievementsPage.jsx';
 import SpiritualPage from './pages/SpiritualPage.jsx'; // Placeholder
 import EmploymentPage from './pages/EmploymentPage.jsx';
+import TroubleshootingPage from './pages/TroubleshootingPage.jsx';
 import ReEntryPage from './pages/ReEntryPage.jsx';
 
 // This new component will live inside the provider and can access the context
@@ -90,12 +91,13 @@ function App() {
                   <>
                     <li><NavLink to="/game">Game</NavLink></li>
                     <li><NavLink to="/leaderboard">Leaderboard</NavLink></li>
+                    <li><NavLink to="/bible-study">Bible Study</NavLink></li>
                     <li><NavLink to="/dashboard">My Dashboard</NavLink></li>
+                    <li><NavLink to="/profile">My Profile</NavLink></li>
                     <li><NavLink to="/my-progress">My Progress</NavLink></li>
                     <li><NavLink to="/hall-of-faith">Hall of Faith</NavLink></li>
                     <li><NavLink to="/bible-reader">Bible Reader</NavLink></li>
                     <li><NavLink to="/prayer-wall">Prayer Wall</NavLink></li>
-                    <li><NavLink to="/journal">Journal</NavLink></li>
                     <li><NavLink to="/devotional">Daily Devotional</NavLink></li>
                     <li><NavLink to="/achievements">Achievements</NavLink></li>
                     {isAdmin && (
@@ -189,6 +191,14 @@ function App() {
             }
           />
           <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/my-progress"
             element={
               <ProtectedRoute>
@@ -221,14 +231,6 @@ function App() {
             }
           />
           <Route
-            path="/journal"
-            element={
-              <ProtectedRoute>
-                <PrayerJournalPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
             path="/devotional"
             element={
               <ProtectedRoute>
@@ -246,15 +248,21 @@ function App() {
             }
           />
           )}
-
-
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/troubleshooting" element={<TroubleshootingPage />} />
         </Routes>
       </main>
 
       <footer>
-          <p>&copy; {new Date().getFullYear()} Eternal Life Ministry. All rights reserved.</p>
+          <div className="footer-content">
+            <p>&copy; {new Date().getFullYear()} Eternal Life Ministry. All rights reserved.</p>
+            <nav className="footer-nav">
+              <Link to="/about">About</Link>
+              <Link to="/contact">Contact</Link>
+              <Link to="/troubleshooting">Report an Issue</Link>
+            </nav>
+          </div>
       </footer>
     </NotificationProvider>
   )

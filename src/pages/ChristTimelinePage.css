@@ -145,4 +145,35 @@ box-shadow: 0 5px 25px teal;
     left: 15px;
   }
 }
+.back-link:hover {
+  background-color: #e2e6ea;
+}
 
+/* --- New Styles for Sub-Events --- */
+.sub-events-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sub-event-item {
+  padding: 1rem 0 1rem 1.5rem;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sub-event-item:last-child {
+  border-bottom: none;
+}
+
+.sub-event-item h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem 0;
+  color: #333;
+}
+
+.sub-event-item p {
+  font-size: 0.95rem;
+  margin: 0;
+}

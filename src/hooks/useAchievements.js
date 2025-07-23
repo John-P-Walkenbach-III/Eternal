@@ -56,26 +56,22 @@ export const useAchievements = () => {
       }
 
       // --- Process Like/Amen Achievements ---
-      let devotionalLikesCount = 0;
-      for (const devotionalDoc of devotionalSnapshot.docs) {
+      const devotionalLikePromises = devotionalSnapshot.docs.map(devotionalDoc => {
         const userLikeRef = doc(db, 'devotionals', devotionalDoc.id, 'likes', currentUser.uid);
-        const userLikeSnap = await getDoc(userLikeRef);
-        if (userLikeSnap.exists()) {
-          devotionalLikesCount++;
-        }
-      }
+        return getDoc(userLikeRef);
+      });
+      const devotionalLikeSnaps = await Promise.all(devotionalLikePromises);
+      const devotionalLikesCount = devotionalLikeSnaps.filter(snap => snap.exists()).length;
       if (devotionalLikesCount >= 1) {
         unlocked.add('hall_of_faith_like');
       }
 
-      let testimonyAmenCount = 0;
-      for (const testimonyDoc of testimonySnapshot.docs) {
+      const testimonyAmenPromises = testimonySnapshot.docs.map(testimonyDoc => {
         const userAmenRef = doc(db, 'testimonies', testimonyDoc.id, 'likes', currentUser.uid);
-        const userAmenSnap = await getDoc(userAmenRef);
-        if (userAmenSnap.exists()) {
-          testimonyAmenCount++;
-        }
-      }
+        return getDoc(userAmenRef);
+      });
+      const testimonyAmenSnaps = await Promise.all(testimonyAmenPromises);
+      const testimonyAmenCount = testimonyAmenSnaps.filter(snap => snap.exists()).length;
       if (testimonyAmenCount >= 1) {
         unlocked.add('testimony_amen');
       }

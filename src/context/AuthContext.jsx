@@ -1,16 +1,16 @@
-// Example for: src/context/AuthContext.jsx
-
-import React, { useContext, useState, useEffect } from 'react';
-import { auth } from '../firebase'; // Adjust path if needed
-import { 
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import {
+  getAuth,
   onAuthStateChanged,
   signOut,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateProfile
 } from 'firebase/auth';
+import { app } from '../firebase';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -19,16 +19,14 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const auth = getAuth(app);
 
-  async function signup(email, password, displayName) {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    // After creating the user, update their profile with the display name
-    await updateProfile(userCredential.user, {
-      displayName: displayName
-    });
-    // The onAuthStateChanged listener will pick up the new user automatically.
-    // We return the userCredential for any further actions if needed.
-    return userCredential;
+  function signup(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
+  }
+
+  function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logout() {
@@ -36,9 +34,20 @@ export function AuthProvider({ children }) {
   }
 
   function passwordReset(email) {
-    return sendPasswordResetEmail(auth, email)
+    return sendPasswordResetEmail(auth, email);
   }
 
+  async function updateUserProfile(profileData) {
+    if (auth.currentUser) {
+      await updateProfile(auth.currentUser, profileData);
+      // Create a new user object to trigger re-render in consumers.
+      // This is a workaround because onAuthStateChanged doesn't always
+      // fire on profile updates.
+      setCurrentUser({ ...auth.currentUser });
+    } else {
+      throw new Error("No user is currently signed in.");
+    }
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -47,13 +56,15 @@ export function AuthProvider({ children }) {
     });
 
     return unsubscribe;
-  }, []);
+  }, [auth]);
 
   const value = {
     currentUser,
+    login,
     signup,
     passwordReset,
     logout,
+    updateUserProfile,
   };
 
   return (

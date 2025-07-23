@@ -53,6 +53,14 @@ const DashboardPage = () => {
       </div>
 
       <div className="dashboard-grid">
+          <div className="dashboard-card profile-settings">
+          <h3>Your Profile</h3>
+          <div className="profile-info">
+            <p><strong>Display Name:</strong> {getDisplayName(currentUser)}</p>
+            <p><strong>Email:</strong> {currentUser.email}</p>
+          </div>
+          <Link to="/profile" className="card-link">Edit Profile</Link>
+        </div>
         <div className="dashboard-card progress-summary">
           <h3>Bible Study Progress</h3>
           <p>You have completed <strong>{quizProgress.completed}</strong> of <strong>{quizProgress.total}</strong> quizzes.</p>

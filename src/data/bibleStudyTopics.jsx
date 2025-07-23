@@ -18,12 +18,12 @@ export const bibleStudyTopics = [
           { title: "Chapter 8", url: "https://forms.office.com/r/ZJ8tVVqFLy?embed=true", passage: "Matthew 8" },
           { title: "Chapter 9", url: "https://forms.office.com/r/47xu3Lay4L?embed=true", passage: "Matthew 9" },
           { title: "Chapter 10", url: "https://forms.office.com/r/CUSqPqrryw?embed=true", passage: "Matthew 10" },
-          { title: "Chapter 11", url: "", passage: "Matthew 11" },
-          { title: "Chapter 12", url: "", passage: "Matthew 12" },
-          { title: "Chapter 13", url: "", passage: "Matthew 13" },
-          { title: "Chapter 14", url: "", passage: "Matthew 14" },
-          { title: "Chapter 15", url: "", passage: "Matthew 15" },
-          { title: "Chapter 16", url: "", passage: "Matthew 16" },
+          { title: "Chapter 11", url: "https://forms.office.com/r/ZJ8tVVqFLy?embed=true", passage: "Matthew 11" },
+          { title: "Chapter 12", url: "https://forms.office.com/r/XaSejBzjK6?embed=true", passage: "Matthew 12" },
+          { title: "Chapter 13", url: "https://forms.office.com/r/bX1qUwUEkD?embed=true", passage: "Matthew 13" },
+          { title: "Chapter 14", url: "https://forms.office.com/r/zDn2NwfSc4?embed=true", passage: "Matthew 14" },
+          { title: "Chapter 15", url: "https://forms.office.com/r/9NkLh1TTb3?embed=true", passage: "Matthew 15" },
+          { title: "Chapter 16", url: "https://forms.office.com/r/MY3GJ7LsjS?embed=true", passage: "Matthew 16" },
           { title: "Chapter 17", url: "", passage: "Matthew 17" },
           { title: "Chapter 18", url: "", passage: "Matthew 18" },
           { title: "Chapter 19", url: "", passage: "Matthew 19" },
@@ -40,8 +40,7 @@ export const bibleStudyTopics = [
         ]
       },
       //  Book Of Mark Chapters 1-16 Quizzes 29-44
-         
-     
+      
 
       {
         name: "Mark",

@@ -1,3 +1,8 @@
+//// ALL WORKS EXCEPT FOR THE LIKES AND SAVE TO JOURNAL(NO LONGER EXISTS) ON THE DAILY DEVOTIONAL. kEEP AS A BACKUP ////
+
+
+
+
 rules_version = '2';
 
 service cloud.firestore {
