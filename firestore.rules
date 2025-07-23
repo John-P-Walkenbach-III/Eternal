@@ -18,12 +18,13 @@ service cloud.firestore {
     // Devotionals can be read by anyone. Logged-in users can like them
     match /devotionals/{devotionalId} {
       allow read: if true;
-      allow update: if request.auth != null; // For like counts
+      allow create, update: if request.auth != null; // For like counts
 
       match /likes/{userId} {
         allow read, write: if request.auth.uid == userId;
       }
     }
+ 
 
     // Testimonies can be read by anyone. Logged-in users can post and "Amen" them
     match /testimonies/{testimonyId} {

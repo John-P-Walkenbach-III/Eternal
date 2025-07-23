@@ -1,0 +1,39 @@
+.daily-verse-container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
+  border: 1px solid #e0e0e0;
+}
+
+.verse-header {
+  margin-bottom: 1rem;
+}
+
+.verse-header h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.verse-text {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #34495e;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.verse-reference {
+  display: block;
+  font-weight: bold;
+  color: #0056b3;
+  margin-bottom: 1.5rem;
+}
+
+.error-message {
+  color: #e74c3c;
+}
